@@ -6,6 +6,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+body {
+  background-color: #fafafa !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -13,4 +17,19 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/* Helper */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cu-pointer {
+  cursor: pointer;
+}
+
+.w-fit {
+  width: fit-content;
 }

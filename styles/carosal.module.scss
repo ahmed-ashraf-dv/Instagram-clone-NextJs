@@ -1,0 +1,10 @@
+.carosalEl {
+  position: absolute;
+  left: 10rem;
+  top: 1.6rem;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+  }
+}

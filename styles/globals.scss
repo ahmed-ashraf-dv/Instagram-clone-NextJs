@@ -33,3 +33,12 @@ a {
 .w-fit {
   width: fit-content;
 }
+
+.small {
+  font-size: 0.8rem !important;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,7 +1,7 @@
-import LoginForm from "../components/LoginForm";
+import Layout from "../layout";
 
 const Home = () => {
-  return <LoginForm />;
+  return <Layout className="homePage container"></Layout>;
 };
 
 export default Home;

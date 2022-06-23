@@ -1,0 +1,60 @@
+.mainNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 15px;
+  z-index: 999999;
+
+  p,
+  ul {
+    margin: 0;
+  }
+
+  ul {
+    li {
+      cursor: pointer;
+    }
+  }
+
+  .searchBar {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    margin-left: 10%;
+
+    label.searchIcon {
+      position: absolute;
+      left: 15px;
+      cursor: text;
+      font-weight: 200;
+    }
+
+    input {
+      width: 100%;
+      background-color: #efefef;
+      padding: 6px 15px;
+      outline: none;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .emptyQuery {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.6rem;
+      color: #efefef;
+      background-color: #c7c7c7;
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      z-index: 3;
+      user-select: none;
+    }
+  }
+}

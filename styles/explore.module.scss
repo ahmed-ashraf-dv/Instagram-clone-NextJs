@@ -1,0 +1,30 @@
+.imgRow {
+  row-gap: 0.6rem;
+
+  .imgBox {
+    position: relative;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .opacityDrop {
+      position: absolute;
+      opacity: 0;
+      height: 100%;
+      width: 100%;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+
+      .data {
+        width: 70%;
+        flex-wrap: wrap;
+      }
+    }
+
+    &:hover .opacityDrop {
+      opacity: 1;
+    }
+  }
+}

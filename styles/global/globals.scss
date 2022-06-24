@@ -19,26 +19,6 @@ a {
   box-sizing: border-box;
 }
 
-/* Helper */
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cu-pointer {
-  cursor: pointer;
-}
-
-.w-fit {
-  width: fit-content;
-}
-
-.small {
-  font-size: 0.8rem !important;
-}
-
-.flex-between {
-  display: flex;
-  justify-content: space-between;
+button {
+  box-shadow: none !important;
 }

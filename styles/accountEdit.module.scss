@@ -1,0 +1,68 @@
+.editsContainer {
+  background-color: #fff;
+  display: flex;
+
+  .ulNavigate {
+    li {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        background-color: transparent;
+        left: -2px;
+      }
+
+      &.active {
+        button {
+          font-weight: 600;
+        }
+
+        &::before {
+          background-color: #545555;
+        }
+      }
+
+      &:hover:not(.active):before {
+        background-color: #bbbbbbf0;
+      }
+    }
+
+    .navBtn {
+      background-color: #fff;
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+  }
+
+  .edits {
+    form {
+      width: 100%;
+      max-width: 450px;
+
+      label {
+        font-weight: 600;
+
+        &:not(.avatar) {
+          width: 150px;
+        }
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        min-width: 350px;
+      }
+
+      textarea {
+        height: 50px;
+      }
+    }
+  }
+}

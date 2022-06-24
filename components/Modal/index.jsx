@@ -43,7 +43,7 @@ const Modal = () => {
           {/* Modal */}
           <motion.main
             className={`${style.modal} ${getTypeClass()}`}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.19 }}
             animate={{ scale: [1.2, 1] }}
           >
             {type === "New Post" ? (

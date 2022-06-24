@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { isOpen: true, currentData: null, type: "Preview Post" };
+const initialState = { isOpen: false, currentData: null, type: null };
 
 const ModalSlice = createSlice({
   name: "ModalSlice",
   initialState,
   reducers: {
-    openModal: (state, { currentData = null, type }) => {
+    openModal: (state, { payload }) => {
       state.isOpen = true;
-      state.currentData = currentData;
-      state.type = type;
+      state.currentData = payload?.currentData;
+      state.type = payload?.type;
     },
     closeModal: (state) => {
       state.isOpen = false;

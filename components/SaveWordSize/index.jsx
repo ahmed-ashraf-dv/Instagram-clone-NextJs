@@ -4,14 +4,14 @@ const SaveWordSize = ({ className, caption, size }) => {
   const [hideCaption, setHideCaption] = useState(true);
 
   const sizeHandelar = (caption) => {
-    if (caption.length < size) return bio;
+    if (caption.length < size) return caption;
 
     return caption.slice(0, size) + "...";
   };
 
   return (
     <p className={className || ""}>
-      {hideCaption ? <>{sizeHandelar(caption)}</> : caption}
+      {hideCaption ? sizeHandelar(caption) : caption}
       <button
         hidden={!(caption.length >= size)}
         onClick={() => setHideCaption((prev) => !prev)}

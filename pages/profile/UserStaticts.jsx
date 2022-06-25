@@ -1,16 +1,16 @@
 import React from "react";
 
-const UserStaticts = () => {
+const UserStaticts = ({ posts, followers, following }) => {
   return (
     <div className="staticts d-flex justify-content-center justify-content-md-start text-cenetr gap-4 mt-4">
       <p className="posotAmount">
-        <span className="fw-bold">16</span> posts
+        <span className="fw-bold">{posts}</span> posts
       </p>
       <p className="followingAmount">
-        <span className="fw-bold">9,500</span> followers
+        <span className="fw-bold">{followers}</span> Followers
       </p>
       <p className="folowetsAmount">
-        <span className="fw-bold">78</span> Followers
+        <span className="fw-bold">{following}</span> Following
       </p>
     </div>
   );

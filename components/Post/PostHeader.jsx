@@ -1,11 +1,11 @@
 import React from "react";
 import Avatar from "../Avatar";
 
-const PostHeader = () => {
+const PostHeader = ({ avatar, username }) => {
   return (
     <header className="cu-pointer d-flex align-items-center w-fit m-2">
-      <Avatar src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" />
-      <p className="username m-0 ms-2">billieeilish</p>
+      <Avatar src={avatar} />
+      <p className="username m-0 ms-2">{username}</p>
     </header>
   );
 };

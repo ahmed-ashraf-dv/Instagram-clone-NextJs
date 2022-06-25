@@ -14,17 +14,20 @@ const CAPTION =
 
 const CAPTION_SIZE = 100;
 
-const Post = () => {
+const Post = ({ postData }) => {
   return (
     <article className={`${style.post} border ms-md-4 mb-4`}>
-      <PostHeader />
+      <PostHeader
+        avatar={postData.user.avatar}
+        username={postData.user.username}
+      />
       <PostMain />
       <PostFooter reverse>
         <p className="username cu-pointer m-0 mb-1 fw-bold select-none">
-          xx_for3on_xx
+          {postData.username}
         </p>
         <SaveWordSize
-          caption={CAPTION}
+          caption={postData.caption}
           size={CAPTION_SIZE}
           className="bio caption mb-2 ms-1"
         />

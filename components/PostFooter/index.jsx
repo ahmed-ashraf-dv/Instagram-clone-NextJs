@@ -26,7 +26,7 @@ const PostFooter = ({ children, reverse = false }) => {
             <>
               {/* Save */}
               <svg
-                ariaLabel="إزالة"
+                aria-label="إزالة"
                 className="_ab6-"
                 color="#262626"
                 fill="#262626"
@@ -42,7 +42,7 @@ const PostFooter = ({ children, reverse = false }) => {
             <>
               {/* dont */}
               <svg
-                ariaLabel="save"
+                aria-label="save"
                 className="_ab6-"
                 color="#000"
                 fill="#8e8e8e"

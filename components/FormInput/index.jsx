@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import style from "../../styles/loginForm.module.scss";
 
-const FormInput = ({ id, type, placeholder }) => {
-  const [value, setValue] = useState();
+const FormInput = ({ id, type, placeholder, register, value }) => {
   const [isHidden, seIsHidden] = useState(true);
 
   return (
@@ -11,7 +10,8 @@ const FormInput = ({ id, type, placeholder }) => {
       {type === "password" && (
         <div className={`${style.inputGroub}`}>
           <input
-            onChange={(e) => setValue(e.target.value)}
+            autoComplete="off"
+            {...register}
             id={id}
             type={isHidden ? "password" : "text"}
           />
@@ -26,7 +26,7 @@ const FormInput = ({ id, type, placeholder }) => {
       )}
 
       {type !== "password" && (
-        <input onChange={(e) => setValue(e.target.value)} id={id} type={type} />
+        <input autoComplete="off" {...register} id={id} type={type} />
       )}
     </article>
   );

@@ -4,6 +4,8 @@ import style from "../../styles/loginForm.module.scss";
 import Fotter from "../../components/Footer";
 import SignForm from "./SignForm";
 
+import axios from "axios";
+
 import Link from "next/link";
 
 const Sign = () => {
@@ -33,3 +35,28 @@ const Sign = () => {
 };
 
 export default Sign;
+
+export const getServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      props: {},
+    };
+  }
+
+  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
+
+  if (!data.length) {
+    return {
+      props: {},
+    };
+  }
+
+  return {
+    redirect: {
+      destination: "/",
+      permanent: false,
+    },
+  };
+};

@@ -5,10 +5,18 @@ import style from "../../styles/navbar.module.scss";
 import SearchBar from "./SearchBar";
 import AvatarTap from "./AvatarTap";
 
+import { openModal } from "../../store/ModalSlice";
+
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+
 const navHeight = "67px";
 
-const Navbar = () => {
+const Navbar = ({ avatar, username }) => {
   const [avatarList, setAvatarList] = useState(false);
+  const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const closeListsHandelar = () => {
     setAvatarList(false);
@@ -30,7 +38,7 @@ const Navbar = () => {
               className={`${style.mainList} list-style flex-center list-unstyled gap-4`}
             >
               {/* Home Icon */}
-              <li>
+              <li onClick={() => router.push("/")}>
                 <svg
                   aria-label="Home"
                   className="_8-yf5 "
@@ -52,7 +60,7 @@ const Navbar = () => {
               </li>
 
               {/* New Post Icon */}
-              <li>
+              <li onClick={() => dispatch(openModal({ type: "New Post" }))}>
                 <svg
                   aria-label="New Post"
                   className="_8-yf5 "
@@ -97,7 +105,7 @@ const Navbar = () => {
               </li>
 
               {/* Explore */}
-              <li>
+              <li onClick={() => router.push("/explore")}>
                 <svg
                   aria-label="Find People"
                   className="_8-yf5 "
@@ -152,6 +160,8 @@ const Navbar = () => {
               {/* Avatar */}
               <li>
                 <AvatarTap
+                  username={username}
+                  avatar={avatar}
                   closeListsHandelar={closeListsHandelar}
                   avatarList={avatarList}
                   setAvatarList={setAvatarList}

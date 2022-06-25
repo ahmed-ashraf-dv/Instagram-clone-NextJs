@@ -3,6 +3,7 @@ import style from "../../styles/accountEdit.module.scss";
 
 import Layout from "../../layout";
 import EditForm from "./EditForm";
+import axios from "axios";
 
 const NAVIGATE_TAPS = [
   "Edit Profile",
@@ -43,3 +44,33 @@ const edit = () => {
 };
 
 export default edit;
+
+export const getServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
+
+  if (!data.length) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      userData: data[0],
+    },
+  };
+};

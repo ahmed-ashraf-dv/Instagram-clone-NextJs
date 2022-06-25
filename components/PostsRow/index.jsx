@@ -3,14 +3,15 @@ import PostThumbnail from "../PostThumbnail";
 import style from "../../styles/explore.module.scss";
 
 const PostsRow = ({ posts }) => {
+  console.log(posts);
   return (
     <div className={`row ${style.imgRow}`}>
-      {posts.map((_, idx) => (
+      {posts.map(({ id, img, loves, comments }) => (
         <PostThumbnail
-          key={idx}
-          src="/289026658_539852937875491_5226162573037377417_n.jfif"
-          commentsAmout={5000}
-          heartsAmout={5000}
+          key={id}
+          src={img}
+          commentsAmout={comments}
+          heartsAmout={loves}
         />
       ))}
     </div>

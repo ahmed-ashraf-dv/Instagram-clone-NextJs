@@ -45,7 +45,7 @@ const Modal = () => {
             transition={{ duration: 0.19 }}
             animate={{ scale: [1.2, 1] }}
           >
-            <CurrentModal />
+            <CurrentModal type={type} />
           </motion.main>
         </div>
       )}

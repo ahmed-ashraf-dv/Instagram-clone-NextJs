@@ -9,13 +9,58 @@
   z-index: 999999;
 
   p,
-  ul {
+  .mainList {
     margin: 0;
   }
 
-  ul {
+  .mainList {
     li {
       cursor: pointer;
+      position: relative;
+
+      &:last-of-type {
+        z-index: 1200;
+      }
+
+      .hiddenList {
+        position: absolute;
+        background-color: #fff;
+        top: calc(100% + 16px);
+        left: calc(50% - 31px);
+        transform: translateX(-50%);
+        border-radius: 8px;
+        z-index: 1000;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 75%;
+          top: -8px;
+          height: 14px;
+          width: 14px;
+          border: 1px solid #dee2e6;
+          background: #fff;
+          transform: translateX(-50%) rotate(45deg);
+          border-right: transparent;
+          border-bottom: transparent;
+        }
+
+        li {
+          padding: 4px 38px 4px 14px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #f1f1f1;
+          }
+        }
+
+        hr {
+          margin: 1px 0;
+        }
+      }
     }
   }
 
@@ -56,5 +101,13 @@
       z-index: 3;
       user-select: none;
     }
+  }
+
+  .closeListsBackDrop {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 }

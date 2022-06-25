@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import style from "../../styles/modal.module.scss";
-import Avatar from "../Avatar";
-import CommentInput from "../CommentInput";
-import CommentsContainer from "../CommentsContainer";
-import PostFooter from "../PostFooter";
+import style from "../../../styles/modal.module.scss";
+import Avatar from "../../Avatar";
+import CommentInput from "../../CommentInput";
+import CommentsContainer from "../../CommentsContainer";
+import PostFooter from "../../PostFooter";
 
 const PreviewPostModal = () => {
   return (

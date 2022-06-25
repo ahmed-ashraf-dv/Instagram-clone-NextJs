@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../../styles/modal.module.scss";
+import style from "../../../styles/modal.module.scss";
 
 const NewPostModal = () => {
   return (

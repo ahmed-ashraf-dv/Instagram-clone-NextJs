@@ -1,16 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState } from "react";
 import style from "../../styles/navbar.module.scss";
+
 import SearchBar from "./SearchBar";
-import Avatar from "../Avatar";
+import AvatarTap from "./AvatarTap";
 
 const navHeight = "67px";
 
 const Navbar = () => {
+  const [avatarList, setAvatarList] = useState(false);
+
+  const closeListsHandelar = () => {
+    setAvatarList(false);
+  };
+
   return (
     <>
       <div className="offsetTop" style={{ marginTop: navHeight }} />
-
       <nav className={`${style.mainNavbar} px-4`}>
         <div className="container-fluid flex-between align-items-center">
           <div className="brand cu-pointer">
@@ -20,7 +26,9 @@ const Navbar = () => {
           <SearchBar />
 
           <div className="navs">
-            <ul className="list-style flex-center list-unstyled gap-4">
+            <ul
+              className={`${style.mainList} list-style flex-center list-unstyled gap-4`}
+            >
               {/* Home Icon */}
               <li>
                 <svg
@@ -143,9 +151,18 @@ const Navbar = () => {
 
               {/* Avatar */}
               <li>
-                <Avatar src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" />
+                <AvatarTap
+                  closeListsHandelar={closeListsHandelar}
+                  avatarList={avatarList}
+                  setAvatarList={setAvatarList}
+                />
               </li>
             </ul>
+            <div
+              hidden={!avatarList}
+              onClick={closeListsHandelar}
+              className={`${style.closeListsBackDrop}`}
+            ></div>
           </div>
         </div>
       </nav>

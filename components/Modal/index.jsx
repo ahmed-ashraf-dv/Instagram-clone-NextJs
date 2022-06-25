@@ -1,7 +1,6 @@
 import React from "react";
 import style from "../../styles/modal.module.scss";
-import NewPostModal from "./NewPostModal";
-import PreviewPostModal from "./PreviewPostModal";
+import CurrentModal from "./CurrentModal";
 
 import { motion } from "framer-motion";
 
@@ -46,13 +45,7 @@ const Modal = () => {
             transition={{ duration: 0.19 }}
             animate={{ scale: [1.2, 1] }}
           >
-            {type === "New Post" ? (
-              <NewPostModal />
-            ) : type === "Preview Post" ? (
-              <PreviewPostModal />
-            ) : (
-              ""
-            )}
+            <CurrentModal />
           </motion.main>
         </div>
       )}

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import FormInput from "../FormInput";
+import style from "../../styles/loginForm.module.scss";
 
 const Form = () => {
   return (

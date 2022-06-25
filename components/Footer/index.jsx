@@ -19,7 +19,7 @@ const TAPS = [
 
 const Footer = () => {
   return (
-    <footer className={style.mainFotter}>
+    <footer className={style.mainFotter + " pt-3"}>
       <div className={`${style.taps} text-center`}>
         {TAPS.map((tap, idx) => (
           <p

@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import style from "../../styles/loginForm.module.scss";
-import FormInput from "../../components/FormInput";
 import Fotter from "../../components/Footer";
+import SignForm from "./SignForm";
 
-const SignForm = () => {
+import Link from "next/link";
+
+const Sign = () => {
   return (
     <>
       <section className={`${style.loginForm}  flex-center container`}>
@@ -16,9 +18,11 @@ const SignForm = () => {
           >
             <p className="m-0">
               Have an account?{" "}
-              <span className="cu-pointer btn-link text-decoration-none">
-                Log in
-              </span>
+              <Link href="/login">
+                <span className="cu-pointer btn-link text-decoration-none">
+                  Log in
+                </span>
+              </Link>
             </p>
           </article>
         </div>
@@ -28,4 +32,4 @@ const SignForm = () => {
   );
 };
 
-export default SignForm;
+export default Sign;

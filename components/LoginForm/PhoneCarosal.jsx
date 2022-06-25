@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Carosal from "../Carosal";
+import style from "../../styles/loginForm.module.scss";
 
 const PhoneCarosal = () => {
   return (

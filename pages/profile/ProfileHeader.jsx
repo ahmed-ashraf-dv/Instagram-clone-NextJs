@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const ProfileHeader = () => {
   return (
@@ -7,7 +8,9 @@ const ProfileHeader = () => {
         xx_for3on_xx
       </p>
 
-      <button className="btn btn-light border px-3 mt-2">Edit Profile</button>
+      <Link href="/edit">
+        <button className="btn btn-light border px-3 mt-2">Edit Profile</button>
+      </Link>
     </header>
   );
 };

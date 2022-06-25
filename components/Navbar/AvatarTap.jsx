@@ -14,6 +14,7 @@ const AvatarTap = ({ avatarList, setAvatarList, closeListsHandelar }) => {
 
       <motion.article
         onClick={closeListsHandelar}
+        initial={{ opacity: 0 }}
         animate={{
           opacity: avatarList ? 1 : 0,
           y: avatarList ? 2 : -5,

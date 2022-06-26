@@ -3,7 +3,7 @@ import InputGroup from "../../components/InputGroup";
 import Avatar from "../../components/Avatar";
 import style from "../../styles/accountEdit.module.scss";
 
-const editForm = () => {
+const editForm = ({ userData }) => {
   return (
     <article className={`${style.edits} p-4 p-x-0 mx-auto`}>
       <form>
@@ -12,12 +12,14 @@ const editForm = () => {
             <label htmlFor="avatar" className={`cu-pointer ${style.avatar}`}>
               <Avatar
                 width={50}
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                src={userData.avatar || "/default_avatar.webp"}
               />
             </label>
 
             <div className="data">
-              <p className="m-0 username fw-200 text-muted">xx_for3on_xx</p>
+              <p className="m-0 username fw-200 text-muted">
+                {userData.username}
+              </p>
               <label htmlFor="avatar" className={`cu-pointer ${style.avatar}`}>
                 <p className="btn m-0 btn-link p-0 text-decoration-none">
                   Change Profile Photo
@@ -32,7 +34,7 @@ const editForm = () => {
           <label className="text-center text-md-start" htmlFor="name">
             Name
           </label>
-          <input id="name" type="text" />
+          <input defaultValue={userData.name} id="name" type="text" />
         </InputGroup>
 
         <p className="small text-muted text-center">
@@ -45,7 +47,7 @@ const editForm = () => {
           <label className="text-center text-md-start" htmlFor="username">
             Username
           </label>
-          <input id="bio" type="text" />
+          <input defaultValue={userData.username} id="username" type="text" />
         </InputGroup>
 
         <p className="small text-muted text-center">
@@ -64,7 +66,11 @@ const editForm = () => {
           <label className="text-center text-md-start" htmlFor="bio">
             Bio
           </label>
-          <textarea id="username" type="text" />
+          <textarea
+            defaultValue={userData.bio || "No Bio"}
+            id="bio"
+            type="text"
+          />
         </InputGroup>
 
         <InputGroup>

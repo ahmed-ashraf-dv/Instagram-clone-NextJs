@@ -10,6 +10,8 @@ import { openModal } from "../../store/ModalSlice";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
+import Link from "next/link";
+
 const navHeight = "67px";
 
 const Navbar = ({ avatar, username }) => {
@@ -27,9 +29,11 @@ const Navbar = ({ avatar, username }) => {
       <div className="offsetTop" style={{ marginTop: navHeight }} />
       <nav className={`${style.mainNavbar} px-4`}>
         <div className="container-fluid flex-between align-items-center">
-          <div className="brand cu-pointer">
-            <img src="/instagram.webp" width={100} alt="instagram" />
-          </div>
+          <Link href="/">
+            <div className="brand cu-pointer">
+              <img src="/instagram.webp" width={100} alt="instagram" />
+            </div>
+          </Link>
 
           <SearchBar />
 

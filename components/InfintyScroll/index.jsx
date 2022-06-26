@@ -1,17 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const InfintyScroll = ({ initData, loading, getNextPage, Component }) => {
+const InfintyScroll = ({
+  initData,
+  loading,
+  getNextPage,
+  Component,
+  IsEndComponent,
+  className = "",
+}) => {
   const elment = useRef();
 
   const [pageNum, setPageNum] = useState(1);
-  const [data, setData] = useState(initData);
+  const [data, setData] = useState();
   const [isLoaded, setIsLoaded] = useState(true);
+  const [isEndData, setIsEndData] = useState(false);
 
   useEffect(() => {
-    if (isLoaded) return;
+    setData(initData);
+  }, [initData]);
+
+  useEffect(() => {
+    if (isLoaded || isEndData) return;
 
     const pageniationHandelar = async () => {
       const data = await getNextPage(pageNum);
+
+      if (!data?.length) return setIsEndData(true);
 
       setData((prev) => {
         if (Array.isArray(prev)) return [...prev, ...data];
@@ -23,11 +37,11 @@ const InfintyScroll = ({ initData, loading, getNextPage, Component }) => {
     };
 
     pageniationHandelar();
-  }, [pageNum, isLoaded, getNextPage]);
+  }, [pageNum, isLoaded, getNextPage, isEndData]);
 
   if (typeof window !== "undefined") {
     window.onscroll = () => {
-      const elmentHeight = elment.current.scrollHeight;
+      const elmentHeight = elment.current?.scrollHeight;
       const currentScroll = window.scrollY + window.innerHeight;
 
       const persent = (currentScroll * 100) / elmentHeight; // (%)
@@ -41,12 +55,22 @@ const InfintyScroll = ({ initData, loading, getNextPage, Component }) => {
   }
 
   return (
-    <main ref={elment} className="infinty-scroll-elment">
+    <main ref={elment} className={`infinty-scroll-elment ${className}`}>
       {data?.map((currentData, idx) => (
         <Component key={idx} data={currentData} />
       ))}
 
-      {loading}
+      {/* Loading Spinner */}
+      {!isEndData && initData?.length ? (
+        <div className="loading-spinner">{loading}</div>
+      ) : (
+        <></>
+      )}
+
+      {/* End Page  */}
+      {IsEndComponent && isEndData && (
+        <div className="end-component">{IsEndComponent}</div>
+      )}
     </main>
   );
 };

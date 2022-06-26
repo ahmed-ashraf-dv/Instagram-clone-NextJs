@@ -19,9 +19,13 @@ const NAVIGATE_TAPS = [
   "Help",
 ];
 
-const edit = () => {
+const edit = ({ userData }) => {
   return (
-    <Layout className="container pt-4">
+    <Layout
+      username={userData.username}
+      avatar={userData?.avatar}
+      className="container pt-4"
+    >
       <article className={`${style.editsContainer} border`}>
         <nav className="navigate d-none d-md-block">
           <ul className={`list-unstyled border m-0 ${style.ulNavigate}`}>
@@ -37,7 +41,7 @@ const edit = () => {
           </ul>
         </nav>
 
-        <EditForm />
+        <EditForm userData={userData} />
       </article>
     </Layout>
   );

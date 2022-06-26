@@ -2,7 +2,7 @@
 import React from "react";
 import style from "../../styles/loginForm.module.scss";
 import PhoneCarosal from "./PhoneCarosal";
-import Footer from "../footer";
+import Footer from "../Footer";
 import Form from "./Form";
 import FormFooter from "./FormFooter";
 

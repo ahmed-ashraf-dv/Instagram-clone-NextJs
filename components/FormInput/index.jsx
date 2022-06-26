@@ -10,8 +10,8 @@ const FormInput = ({ id, type, placeholder, register, value }) => {
       {type === "password" && (
         <div className={`${style.inputGroub}`}>
           <input
-            autoComplete="off"
             {...register}
+            autoComplete="off"
             id={id}
             type={isHidden ? "password" : "text"}
           />

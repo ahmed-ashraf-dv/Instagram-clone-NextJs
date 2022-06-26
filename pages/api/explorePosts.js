@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const handler = async (req, res) => {
-  const { data } = await axios(`http://localhost:3005/posts`);
+  const { num, amount } = req.query;
+
+  const { data } = await axios(
+    `http://localhost:3005/posts?_limit=${amount}&_page=${num}&_sort=id&_order=desc`
+  );
 
   data.sort(() => Math.random() - 0.5);
 

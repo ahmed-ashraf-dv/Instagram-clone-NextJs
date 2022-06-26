@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
 import useAuth from "../hooks/useAuth";
 
@@ -11,6 +10,9 @@ import InfintyScroll from "../components/InfintyScroll";
 
 import style from "../styles/homePage.module.scss";
 import { useRouter } from "next/router";
+
+import request from "../utils/request";
+import axios from "axios";
 
 const Home = ({ userData, isLogin }) => {
   const { logout } = useAuth();
@@ -114,7 +116,9 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
+  const { data } = await request({
+    url: `/users?token=${token}`,
+  });
 
   if (!data.length) {
     return {

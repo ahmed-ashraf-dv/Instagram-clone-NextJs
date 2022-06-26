@@ -17,7 +17,9 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
+  const { data } = await request({
+    url: `/users?token=${token}`,
+  });
 
   if (!data.length) {
     return {

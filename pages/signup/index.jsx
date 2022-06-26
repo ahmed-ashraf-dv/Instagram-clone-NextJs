@@ -2,11 +2,11 @@
 import React from "react";
 import style from "../../styles/loginForm.module.scss";
 import Fotter from "../../components/Footer";
-import SignForm from "./SignForm";
-
-import axios from "axios";
+import SignForm from "../../components/SignForm";
 
 import Link from "next/link";
+
+import request from "../../utils/request";
 
 const Sign = () => {
   return (
@@ -45,7 +45,9 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
+  const { data } = await request({
+    url: `/users?token=${token}`,
+  });
 
   if (!data.length) {
     return {

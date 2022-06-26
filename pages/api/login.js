@@ -1,22 +1,4 @@
-import axios from "axios";
-
-const generateToken = (num) => {
-  // Init result
-  let result = "";
-
-  // Push the random chr
-  while (result.length < num) {
-    const randomChr = Math.random().toString(36).substr(2);
-
-    result += randomChr;
-  }
-
-  // Slice result to get same num in argument
-  result = result.slice(0, num);
-
-  // return result after gnerate it
-  return result;
-};
+import request from "../../utils/request";
 
 const handler = async (req, res) => {
   if (req.method !== "POST") {
@@ -25,9 +7,9 @@ const handler = async (req, res) => {
 
   const { username, password } = req.body;
 
-  const { data } = await axios(
-    `http://localhost:3005/users?username=${username}&password=${password}`
-  );
+  const { data } = await request({
+    url: `/users?username=${username}&password=${password}`,
+  });
 
   if (!data.length) {
     return res

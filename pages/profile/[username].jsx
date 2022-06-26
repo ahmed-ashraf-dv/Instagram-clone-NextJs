@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import Layout from "../../layout";
 import Avatar from "../../components/Avatar";
 import SaveWordSize from "../../components/SaveWordSize";
-import UserStaticts from "./UserStaticts";
-import ProfileHeader from "./ProfileHeader";
+import UserStaticts from "../../components/Profile/UserStaticts";
+import ProfileHeader from "../../components/Profile/ProfileHeader";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import PostThumbnail from "../../components/PostThumbnail";
 import InfintyScroll from "../../components/InfintyScroll";
@@ -12,6 +12,7 @@ import InfintyScroll from "../../components/InfintyScroll";
 import style from "../../styles/explore.module.scss";
 
 import axios from "axios";
+import request from "../../utils/request";
 
 const BIO_SIZE = 200; // Chracters
 
@@ -104,6 +105,8 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
 export default Profile;
 
 export const getServerSideProps = async ({ req, query }) => {
+  const LOCAL_API = process.env.LOCAL_API_LINK;
+
   const { token } = req.cookies;
   const { username } = query;
 
@@ -116,13 +119,16 @@ export const getServerSideProps = async ({ req, query }) => {
     };
   }
 
-  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
-  const { data: cuurentProfile } = await axios(
-    `http://localhost:3005/users?username=${username}`
-  );
+  const { data } = await request({
+    url: `/users?token=${token}`,
+  });
+
+  const { data: cuurentProfile } = await request({
+    url: `/users?username=${username}`,
+  });
 
   const { data: cuurentProfileStaticts } = await axios(
-    `http://localhost:3000/api/getStaticts?username=${username}`
+    `${LOCAL_API}/getStaticts?username=${username}&token=${token}`
   );
 
   if (!data?.length || !cuurentProfile?.length) {

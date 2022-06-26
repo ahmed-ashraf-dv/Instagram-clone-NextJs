@@ -15,6 +15,8 @@ const InfintyScroll = ({
   const [isLoaded, setIsLoaded] = useState(true);
   const [isEndData, setIsEndData] = useState(false);
 
+  const [startScroll, setStartScroll] = useState(false);
+
   useEffect(() => {
     setData(initData);
   }, [initData]);
@@ -41,6 +43,8 @@ const InfintyScroll = ({
 
   if (typeof window !== "undefined") {
     window.onscroll = () => {
+      setStartScroll(true);
+
       const elmentHeight = elment.current?.scrollHeight;
       const currentScroll = window.scrollY + window.innerHeight;
 
@@ -61,7 +65,7 @@ const InfintyScroll = ({
       ))}
 
       {/* Loading Spinner */}
-      {!isEndData && initData?.length ? (
+      {!isEndData && initData?.length && startScroll ? (
         <div className="loading-spinner">{loading}</div>
       ) : (
         <></>

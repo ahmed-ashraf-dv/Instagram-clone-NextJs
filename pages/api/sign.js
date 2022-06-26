@@ -1,4 +1,4 @@
-import axios from "axios";
+import request from "../../utils/request";
 
 const generateToken = (num) => {
   // Init result
@@ -25,9 +25,9 @@ const handler = async (req, res) => {
 
   const { email, name, username, password } = req.body;
 
-  const { data } = await axios(
-    `http://localhost:3005/users?username=${username}`
-  );
+  const { data } = await request({
+    url: `/users?username=${username}`,
+  });
 
   if (data.length) {
     return res
@@ -37,21 +37,18 @@ const handler = async (req, res) => {
 
   const token = generateToken(16);
 
-  await axios("http://localhost:3005/users", {
-    method: "POST",
-    data: {
-      id: null,
-      username,
-      name,
-      password,
-      token,
-      email,
-      bio: "",
-      avatar: null,
-      followers: [],
-      following: [],
-      posts: [],
-    },
+  await request.post("/users", {
+    id: null,
+    username,
+    name,
+    password,
+    token,
+    email,
+    bio: "",
+    avatar: null,
+    followers: [],
+    following: [],
+    posts: [],
   });
 
   res.status(200).json({ code: 200, token });

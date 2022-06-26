@@ -10,7 +10,18 @@ const PostThumbnail = ({ data }) => {
   const dispatch = useDispatch();
 
   const openModalPost = () => {
-    dispatch(openModal({ currentData: {}, type: "Preview Post" }));
+    dispatch(
+      openModal({
+        currentData: {
+          img: data.img,
+          caption: data.caption,
+          user: data.user,
+          createdAt: data.createdAt,
+          postId: data.id,
+        },
+        type: "Preview Post",
+      })
+    );
   };
 
   return (

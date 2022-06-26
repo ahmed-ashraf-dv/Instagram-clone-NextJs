@@ -6,7 +6,11 @@ import CommentInput from "../../CommentInput";
 import CommentsContainer from "../../CommentsContainer";
 import PostFooter from "../../PostFooter";
 
+import { useSelector } from "react-redux";
+
 const PreviewPostModal = () => {
+  const { currentData } = useSelector(({ ModalSlice }) => ModalSlice);
+
   return (
     <div className={`${style.previewPostContain} h-100`}>
       <div className={`${style.contain} flex-center align-items-start h-100`}>
@@ -14,8 +18,10 @@ const PreviewPostModal = () => {
           <div
             className={`${style.headerDetails} d-flex justify-content-end align-items-center gap-3 p-3`}
           >
-            <p className={`${style.username}`}>• username</p>
-            <Avatar src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" />
+            <p className={`${style.username}`}>
+              • {currentData?.user?.username}
+            </p>
+            <Avatar src={currentData?.user?.avatar} />
           </div>
 
           <CommentsContainer />
@@ -24,11 +30,7 @@ const PreviewPostModal = () => {
         </div>
 
         <div className={`${style.postImg} w-50 h-100`}>
-          <img
-            className="w-100 h-100"
-            src="/289026658_539852937875491_5226162573037377417_n.jfif"
-            alt=""
-          />
+          <img className="w-100 h-100" src={currentData?.img} alt="" />
         </div>
       </div>
     </div>

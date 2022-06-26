@@ -1,6 +1,6 @@
 import React from "react";
-import InputGroup from "../../components/InputGroup";
-import Avatar from "../../components/Avatar";
+import InputGroup from "../InputGroup";
+import Avatar from "../Avatar";
 import style from "../../styles/accountEdit.module.scss";
 
 const editForm = ({ userData }) => {

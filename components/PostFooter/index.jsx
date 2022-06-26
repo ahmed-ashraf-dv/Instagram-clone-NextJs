@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const PostFooter = ({ children, reverse = false }) => {
   const [state, setState] = useState({
     isSave: false,
     isLike: false,
   });
+
+  const { currentData } = useSelector(({ ModalSlice }) => ModalSlice);
 
   const savePost = () => {
     setState((prev) => ({ ...prev, isSave: !prev.isSave }));
@@ -159,7 +162,9 @@ const PostFooter = ({ children, reverse = false }) => {
         </div>
       </div>
       {children ?? null}
-      <div className="ago small text-muted text-end pb-3">3 days ago</div>
+      <div className="ago small text-muted text-end pb-3">
+        {currentData?.createdAt}
+      </div>
     </div>
   );
 };

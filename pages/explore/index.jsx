@@ -8,6 +8,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import style from "../../styles/explore.module.scss";
 
 import axios from "axios";
+import request from "../../utils/request";
 
 const Explore = ({ userData }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +73,9 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
+  const { data } = await request({
+    url: `/users?token=${token}`,
+  });
 
   if (!data.length) {
     return {

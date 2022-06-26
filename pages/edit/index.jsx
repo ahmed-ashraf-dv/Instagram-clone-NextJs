@@ -2,8 +2,8 @@ import React from "react";
 import style from "../../styles/accountEdit.module.scss";
 
 import Layout from "../../layout";
-import EditForm from "./EditForm";
-import axios from "axios";
+import EditForm from "../../components/EditForm";
+import request from "../../utils/request";
 
 const NAVIGATE_TAPS = [
   "Edit Profile",
@@ -61,7 +61,9 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const { data } = await axios(`http://localhost:3005/users?token=${token}`);
+  const { data } = await request({
+    url: `/users?token=${token}`,
+  });
 
   if (!data.length) {
     return {

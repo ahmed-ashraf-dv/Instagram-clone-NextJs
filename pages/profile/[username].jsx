@@ -127,10 +127,6 @@ export const getServerSideProps = async ({ req, query }) => {
     url: `/users?username=${username}`,
   });
 
-  const { data: cuurentProfileStaticts } = await axios(
-    `${LOCAL_API}/getStaticts?username=${username}&token=${token}`
-  );
-
   if (!data?.length || !cuurentProfile?.length) {
     return {
       redirect: {
@@ -139,6 +135,10 @@ export const getServerSideProps = async ({ req, query }) => {
       },
     };
   }
+
+  const { data: cuurentProfileStaticts } = await axios(
+    `${LOCAL_API}/getStaticts?username=${username}&token=${token}`
+  );
 
   return {
     props: {

@@ -8,7 +8,11 @@ const handler = async (req, res) => {
   const getId = await request({
     url: `/users?username=${username}`,
   });
-  const { id: userId, followers, following } = getId.data[0];
+
+  if (!getId?.data)
+    return res.status(404).json({ code: 404, Message: "not found" });
+
+  const { id: userId, followers, following } = getId?.data?.[0];
 
   // get Posts
   const { data: posts } = await request({

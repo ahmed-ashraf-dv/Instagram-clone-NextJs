@@ -130,7 +130,7 @@ export const getServerSideProps = async ({ req, query }) => {
   if (!data?.length || !cuurentProfile?.length) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/404",
         permanent: false,
       },
     };

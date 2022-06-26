@@ -1,5 +1,5 @@
 import React from "react";
-import NewPostModal from "./Modals/NewPostModal";
+import NewPostModal from "./Modals/NewPostModals";
 import PreviewPostModal from "./Modals/PreviewPostModal";
 
 const CurrentModal = ({ type }) => {

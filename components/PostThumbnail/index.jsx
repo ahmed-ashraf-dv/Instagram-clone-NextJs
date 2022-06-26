@@ -32,11 +32,11 @@ const PostThumbnail = ({ data }) => {
         <div className={`${style.opacityDrop} flex-center text-light`}>
           <div className={`${style.data} flex-center gap-4`}>
             <div className="comments flex-center gap-2">
-              <p className="m-0">{data.comments}</p>
+              <p className="m-0">{data?.comments?.length || 0}</p>
               <img src="/icons/comment.svg" width={50} alt="" />
             </div>
             <div className="likes flex-center gap-2">
-              <p className="m-0">{data.loves}</p>
+              <p className="m-0">{data?.loves || 0}</p>
               <img src="/icons/heart.svg" width={50} alt="" />
             </div>
           </div>

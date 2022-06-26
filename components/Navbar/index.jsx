@@ -64,7 +64,16 @@ const Navbar = ({ avatar, username }) => {
               </li>
 
               {/* New Post Icon */}
-              <li onClick={() => dispatch(openModal({ type: "New Post" }))}>
+              <li
+                onClick={() =>
+                  dispatch(
+                    openModal({
+                      type: "New Post",
+                      currentData: { username, avatar },
+                    })
+                  )
+                }
+              >
                 <svg
                   aria-label="New Post"
                   className="_8-yf5 "

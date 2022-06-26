@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const PostFooter = ({ children, reverse = false }) => {
+import TimeAgo from "react-timeago";
+
+const PostFooter = ({
+  children,
+  reverse = false,
+  createdAt,
+  isLike = false,
+  disLike,
+}) => {
   const [state, setState] = useState({
     isSave: false,
     isLike: false,
@@ -14,7 +22,13 @@ const PostFooter = ({ children, reverse = false }) => {
   };
 
   const lovePost = () => {
-    setState((prev) => ({ ...prev, isLike: !prev.isLike }));
+    if (isLike || state.isLike) {
+      setState((prev) => ({ ...prev, isLike: false }));
+      if (isLike) disLike?.();
+    } //
+    else {
+      setState((prev) => ({ ...prev, isLike: true }));
+    }
   };
 
   return (
@@ -125,7 +139,7 @@ const PostFooter = ({ children, reverse = false }) => {
           </div>
 
           <div onClick={lovePost} className="like cu-pointer">
-            {state.isLike ? (
+            {state.isLike || isLike ? (
               <>
                 {/* like */}
                 <svg
@@ -163,7 +177,7 @@ const PostFooter = ({ children, reverse = false }) => {
       </div>
       {children ?? null}
       <div className="ago small text-muted text-end pb-3">
-        {currentData?.createdAt}
+        <TimeAgo date={currentData?.createdAt || createdAt} />
       </div>
     </div>
   );

@@ -35,7 +35,12 @@ const Home = ({ userData, isLogin }) => {
 
   useEffect(() => {
     getMorePosts(1).then((posts) => {
-      setInitPosts(posts);
+      const orderByDate = (array) =>
+        array.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+
+      setInitPosts(orderByDate(posts));
 
       setIsLoading(true);
     });

@@ -45,10 +45,9 @@ const handler = async (req, res) => {
     token,
     email,
     bio: "",
-    avatar: null,
+    avatar: "/default_avatar.webp",
     followers: [],
     following: [],
-    posts: [],
   });
 
   res.status(200).json({ code: 200, token });

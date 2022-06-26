@@ -2,8 +2,20 @@ import React, { useState } from "react";
 import style from "../../styles/modal.module.scss";
 import Avatar from "../Avatar";
 
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../store/ModalSlice";
+import { useRouter } from "next/router";
+
 const Comment = ({ data }) => {
   const [isLiked, setIsLiked] = useState();
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const openProfile = (username) => {
+    dispatch(closeModal());
+    router.push(`/profile/${username}`);
+  };
 
   return (
     <div className="user-comment d-flex justify-content-end gap-1 p-3">
@@ -42,9 +54,16 @@ const Comment = ({ data }) => {
         <p>{data?.comment}</p>
       </div>
 
-      <p className={`${style.username} ms-1 me-1`}>• {data?.user?.username}</p>
-
-      <div className="avatar">
+      <p
+        onClick={() => openProfile(data?.user?.username)}
+        className={`${style.username} ms-1 me-1 cu-pointer`}
+      >
+        • {data?.user?.username}
+      </p>
+      <div
+        onClick={() => openProfile(data?.user?.username)}
+        className="avatar cu-pointer"
+      >
         <Avatar src={data?.user?.avatar} />
       </div>
     </div>

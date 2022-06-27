@@ -5,13 +5,10 @@ const ProfileHeader = ({
   username,
   MyProfile,
   isFollowed,
-  setIsFollowed,
   isFollowedLoading,
+  followHandelar,
+  followLoading,
 }) => {
-  const followToggle = () => {
-    setIsFollowed((prev) => !prev);
-  };
-
   return (
     <header className="d-block d-md-flex align-items-center gap-4 mb-3">
       <p className="m-2 m-md-0 username fs-2 light-font text-muted">
@@ -28,15 +25,19 @@ const ProfileHeader = ({
         </Link>
       ) : isFollowed ? (
         <button
-          onClick={followToggle}
-          className="btn btn-light border px-3 mt-2"
+          onClick={followHandelar}
+          className={`btn btn-light border px-3 mt-2 ${
+            followLoading ? "event-none" : ""
+          }`}
         >
           unfollow
         </button>
       ) : (
         <button
-          onClick={followToggle}
-          className="btn btn-primary border px-3 mt-2"
+          onClick={followHandelar}
+          className={`btn btn-primary border px-3 mt-2 ${
+            followLoading ? "event-none" : ""
+          }`}
         >
           Follow
         </button>

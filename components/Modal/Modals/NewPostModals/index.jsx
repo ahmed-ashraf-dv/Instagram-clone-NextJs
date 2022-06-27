@@ -79,10 +79,11 @@ const NewPostModal = () => {
         <p className="m-0">Create a new post</p>
 
         {/* // Next */}
-        <div
+        <button
           disabled={!imgBase64}
           onClick={nextStep}
-          className="nextArrow cu-pointer"
+          className="btn btn-link p-0 nextArrow cu-pointer"
+          type="button"
         >
           <svg
             aria-label="back"
@@ -114,7 +115,7 @@ const NewPostModal = () => {
               strokeWidth="2"
             ></polyline>
           </svg>
-        </div>
+        </button>
       </div>
 
       {/* Modal Conatin */}

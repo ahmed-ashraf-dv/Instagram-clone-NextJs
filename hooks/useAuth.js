@@ -47,7 +47,32 @@ const useAuth = () => {
     router.push("/login");
   };
 
-  return { signUp, login, logout };
+  const follow = async ({ username, onError, onSuccess, type = "follow" }) => {
+    const token = cookie.get("token");
+
+    try {
+      const { data } = await axios("/api/follow", {
+        method: "POST",
+        data: {
+          targetUsername: username,
+          token,
+          type,
+        },
+      });
+
+      if (data.code === 200) {
+        onSuccess?.();
+      }
+
+      if (data.code !== 200) {
+        onError(data.message);
+      }
+    } catch (err) {
+      onError(err.message);
+    }
+  };
+
+  return { signUp, login, logout, follow };
 };
 
 export default useAuth;

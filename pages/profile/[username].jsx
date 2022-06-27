@@ -14,6 +14,8 @@ import style from "../../styles/explore.module.scss";
 import axios from "axios";
 import request from "../../utils/request";
 
+import useAuth from "../../hooks/useAuth";
+
 const BIO_SIZE = 200; // Chracters
 
 const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
@@ -23,6 +25,12 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
   // For Follow
   const [isFollowed, setIsFollowed] = useState(false);
   const [isFollowedLoading, setIsFollowedLoading] = useState(false);
+
+  // Is Followed Now
+  const [staticts, setStaticts] = useState({});
+  const [followLoading, setFollowLoading] = useState(false);
+
+  const { follow } = useAuth();
 
   const getMorePosts = useCallback(
     async (pageNum) => {
@@ -48,8 +56,44 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
 
   useEffect(() => {
     setIsFollowed(cuurentProfileStaticts.isFollowed);
+    setStaticts(cuurentProfileStaticts);
     setIsFollowedLoading(true);
   }, [cuurentProfileStaticts]);
+
+  const followHandelar = () => {
+    setFollowLoading(true);
+
+    if (isFollowed) {
+      follow({
+        username: cuurentProfile.username,
+        type: "unfollow",
+        onSuccess: () => {
+          setStaticts((prev) => ({ ...prev, followers: prev.followers - 1 }));
+          setIsFollowed((prev) => !prev);
+          setFollowLoading(false);
+        },
+        onError: (msg) => {
+          alert(msg);
+          setFollowLoading(false);
+        },
+      });
+
+      return;
+    }
+
+    follow({
+      username: cuurentProfile.username,
+      onSuccess: () => {
+        setStaticts((prev) => ({ ...prev, followers: prev.followers + 1 }));
+        setIsFollowed((prev) => !prev);
+        setFollowLoading(false);
+      },
+      onError: (msg) => {
+        alert(msg);
+        setFollowLoading(false);
+      },
+    });
+  };
 
   return (
     <Layout
@@ -67,15 +111,16 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
         <div className="data">
           <ProfileHeader
             isFollowed={isFollowed}
-            setIsFollowed={setIsFollowed}
             isFollowedLoading={isFollowedLoading}
             MyProfile={cuurentProfile.username === userData.username}
             username={cuurentProfile.username}
+            followHandelar={followHandelar}
+            followLoading={followLoading}
           />
           <UserStaticts
-            posts={cuurentProfileStaticts.posts}
-            followers={cuurentProfileStaticts.followers}
-            following={cuurentProfileStaticts.following}
+            posts={staticts.posts || 0}
+            followers={staticts.followers || 0}
+            following={staticts.following || 0}
           />
           <SaveWordSize
             caption={cuurentProfile.bio || "No caption"}

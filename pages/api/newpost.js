@@ -31,7 +31,7 @@ const handler = async (req, res) => {
 
   await request.post("/posts", data);
 
-  res.status(200).json({ code: 200, token });
+  res.status(200).json({ code: 200 });
 };
 
 export default handler;

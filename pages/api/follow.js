@@ -23,13 +23,14 @@ const handler = async (req, res) => {
     return res.status(400).json({ code: 400, message: "this Page not found" });
   }
 
-  const { username: cuurentUsername, avatar: cuurentAvatar } = cuurentUser;
-  const { avatar: targettUserAvatar } = targetUser;
+  const { id: clientUserId } = cuurentUser;
+  const { id: targetUserId } = targetUser;
 
   if (type === "unfollow") {
     const { data } = await request(
-      `/follow?from=${cuurentUsername}&to=${targetUsername}`
+      `/follow?fromUserId=${clientUserId}&toUserId=${targetUserId}`
     );
+
     const { id: followId } = data?.[0];
 
     await request.delete(`/follow/${followId}`);
@@ -37,17 +38,13 @@ const handler = async (req, res) => {
     return res.status(200).json({ code: 200 });
   }
 
-  await request.post("/follow", {
+  const follow = {
     id: null,
-    from: cuurentUsername,
-    to: targetUsername,
-    fromData: {
-      avatart: cuurentAvatar,
-    },
-    toData: {
-      avatart: targettUserAvatar,
-    },
-  });
+    fromUserId: clientUserId,
+    toUserId: targetUserId,
+  };
+
+  await request.post("/follow", follow);
 
   res.status(200).json({ code: 200 });
 };

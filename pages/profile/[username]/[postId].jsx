@@ -94,7 +94,7 @@ export const getServerSideProps = async ({ req, query }) => {
   const { post } = postData;
 
   // Check if avilabel Post
-  if (!post || !post.length) {
+  if (!post) {
     return {
       redirect: {
         destination: "/404",
@@ -104,7 +104,7 @@ export const getServerSideProps = async ({ req, query }) => {
   }
 
   // Check if username his is publisher
-  if (post[0].user.username !== username) {
+  if (post.userId !== cuurentProfile[0]?.id) {
     return {
       redirect: {
         destination: `/profile/${username}`,
@@ -118,7 +118,7 @@ export const getServerSideProps = async ({ req, query }) => {
       userData: data[0],
       cuurentProfile: cuurentProfile[0],
       cuurentProfileStaticts: cuurentProfileStaticts,
-      post: post[0],
+      post: post,
     },
   };
 };

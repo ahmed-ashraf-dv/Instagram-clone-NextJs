@@ -18,6 +18,15 @@ const generateToken = (num) => {
   return result;
 };
 
+const getRandomAvatar = () => {
+  const NUM_OF_DEFAULT_AVATARS = 5;
+
+  const avatarName = "default_avatar";
+  const randomNum = Math.ceil(Math.random() * NUM_OF_DEFAULT_AVATARS);
+
+  return `/${avatarName + randomNum}.webp`;
+};
+
 const handler = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(400).json({ code: 400, message: "this Page not found" });
@@ -37,7 +46,7 @@ const handler = async (req, res) => {
 
   const token = generateToken(16);
 
-  await request.post("/users", {
+  const user = {
     id: null,
     username,
     name,
@@ -45,8 +54,10 @@ const handler = async (req, res) => {
     token,
     email,
     bio: "",
-    avatar: "/default_avatar.webp",
-  });
+    avatar: getRandomAvatar(),
+  };
+
+  await request.post("/users", user);
 
   res.status(200).json({ code: 200 });
 };

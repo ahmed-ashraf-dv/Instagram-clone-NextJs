@@ -19,9 +19,9 @@ const handler = async (req, res) => {
       .json({ code: 201, message: "You do not have the access" });
   }
 
-  const username = userData[0].username;
+  const userId = userData[0].id;
 
-  if (postData?.[0]?.user?.username !== username) {
+  if (postData?.[0]?.userId !== userId) {
     return res
       .status(200)
       .json({ code: 201, message: "You do not have the access" });

@@ -104,6 +104,11 @@ const EditForm = ({ userData }) => {
       requestData[key] = cuurentData[key];
     });
 
+    // For Handel Image
+    if (changeingKeys.includes("avatar")) {
+      requestData.avatar = imgBase64;
+    }
+
     const token = cookie.get("token");
 
     try {

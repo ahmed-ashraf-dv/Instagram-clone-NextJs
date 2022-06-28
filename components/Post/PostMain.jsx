@@ -3,29 +3,19 @@ import React, { useState, useEffect } from "react";
 import style from "../../styles/post.module.scss";
 
 const PostMain = ({ img, setisLove }) => {
-  const [clicks, setClick] = useState(0);
   const [love, setLove] = useState(false);
-
-  useEffect(() => {
-    if (clicks > 0) setTimeout(() => setClick(0), 1000);
-  }, [clicks]);
 
   useEffect(() => {
     if (love) setTimeout(() => setLove(false), 1300);
   }, [love]);
 
   const checkDoubleClick = () => {
-    setClick((prev) => prev + 1);
-
-    if (clicks >= 1) {
-      setClick(0);
-      setisLove(true);
-      setLove(true);
-    }
+    setisLove(true);
+    setLove(true);
   };
 
   return (
-    <main onClick={checkDoubleClick} className={`${style.imgBox}`}>
+    <main onDoubleClick={checkDoubleClick} className={`${style.imgBox}`}>
       <div
         className={`postion-center flex-center w-100 h-100 ${style.loverHeart}`}
       >

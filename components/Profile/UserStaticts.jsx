@@ -6,10 +6,10 @@ const UserStaticts = ({ posts, followers, following }) => {
       <p className="posotAmount">
         <span className="fw-bold">{posts}</span> posts
       </p>
-      <p className="followingAmount">
+      <p className="followingAmount cu-pointer select-none">
         <span className="fw-bold">{followers}</span> Followers
       </p>
-      <p className="folowetsAmount">
+      <p className="folowetsAmount cu-pointer select-none">
         <span className="fw-bold">{following}</span> Following
       </p>
     </div>

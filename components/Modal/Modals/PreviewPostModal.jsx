@@ -28,25 +28,15 @@ const PreviewPostModal = () => {
   };
 
   // Like with double click
-  const [clicks, setClick] = useState(0);
   const [love, setLove] = useState(false);
-
-  useEffect(() => {
-    if (clicks > 0) setTimeout(() => setClick(0), 1000);
-  }, [clicks]);
 
   useEffect(() => {
     if (love) setTimeout(() => setLove(false), 1300);
   }, [love]);
 
   const checkDoubleClick = () => {
-    setClick((prev) => prev + 1);
-
-    if (clicks >= 1) {
-      setClick(0);
-      setisLove(true);
-      setLove(true);
-    }
+    setisLove(true);
+    setLove(true);
   };
 
   return (
@@ -84,7 +74,7 @@ const PreviewPostModal = () => {
         </div>
 
         <div
-          onClick={checkDoubleClick}
+          onDoubleClick={checkDoubleClick}
           className={`${style.postImg} w-50 h-100 position-relative`}
         >
           <div

@@ -11,8 +11,16 @@ import useAuth from "../../hooks/useAuth";
 
 const schema = yup.object({
   email: yup.string().required("email feld is required"),
-  name: yup.string().required("name feld is required"),
-  username: yup.string().required("username feld is required"),
+  name: yup
+    .string()
+    .required("name feld is required")
+    .min(3, "The name must be greater than 3 characters")
+    .max(20, "The name must be less than 20 characters"),
+  username: yup
+    .string()
+    .required("username feld is required")
+    .min(3, "The username must be greater than 3 characters")
+    .max(20, "The username must be less than 20 characters"),
   password: yup
     .string()
     .min(8, "min size of password is 8")

@@ -7,6 +7,7 @@ const InfintyScroll = ({
   Component,
   IsEndComponent,
   className = "",
+  pageProps = {},
 }) => {
   const elment = useRef();
 
@@ -61,7 +62,7 @@ const InfintyScroll = ({
   return (
     <main ref={elment} className={`infinty-scroll-elment ${className}`}>
       {data?.map((currentData, idx) => (
-        <Component key={idx} data={currentData} />
+        <Component {...pageProps} key={idx} data={currentData} />
       ))}
 
       {/* Loading Spinner */}

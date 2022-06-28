@@ -6,19 +6,22 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../store/ModalSlice";
 
-const PostThumbnail = ({ data }) => {
+const PostThumbnail = ({ data, cuurentUsername }) => {
   const dispatch = useDispatch();
 
   const openModalPost = () => {
+    const currentData = {
+      img: data.img,
+      caption: data.caption,
+      user: data.user,
+      createdAt: data.createdAt,
+      postId: data.id,
+      cuurentUsername,
+    };
+
     dispatch(
       openModal({
-        currentData: {
-          img: data.img,
-          caption: data.caption,
-          user: data.user,
-          createdAt: data.createdAt,
-          postId: data.id,
-        },
+        currentData,
         type: "Preview Post",
       })
     );

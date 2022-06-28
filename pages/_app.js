@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 
 import Modal from "../components/Modal";
 import Head from "next/head";
+import EditPostModal from "../components/Modal/EditPostModal";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -14,7 +15,11 @@ const MyApp = ({ Component, pageProps }) => {
       <Head>
         <link rel="icon" type="image/x-icon" href="/icons/instgram.webp"></link>
       </Head>
+
+      {/* Modals */}
       <Modal />
+      <EditPostModal />
+
       <Component {...pageProps} />
     </Provider>
   );

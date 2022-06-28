@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import Layout from "../../layout";
-import Avatar from "../../components/Avatar";
-import SaveWordSize from "../../components/SaveWordSize";
-import UserStaticts from "../../components/Profile/UserStaticts";
-import ProfileHeader from "../../components/Profile/ProfileHeader";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import PostThumbnail from "../../components/PostThumbnail";
-import InfintyScroll from "../../components/InfintyScroll";
+
+import Avatar from "../Avatar";
+import SaveWordSize from "../SaveWordSize";
+import LoadingSpinner from "../LoadingSpinner";
+import PostThumbnail from "../PostThumbnail";
+import InfintyScroll from "../InfintyScroll";
+
+import UserStaticts from "./UserStaticts";
+import ProfileHeader from "./ProfileHeader";
 
 import style from "../../styles/explore.module.scss";
 
 import axios from "axios";
-import request from "../../utils/request";
-
 import useAuth from "../../hooks/useAuth";
 
 const BIO_SIZE = 200; // Chracters
@@ -139,6 +139,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
           loading={<LoadingSpinner />}
           getNextPage={getMorePosts}
           Component={PostThumbnail}
+          pageProps={{ cuurentUsername: userData.username }}
         />
       ) : (
         <LoadingSpinner />
@@ -148,48 +149,3 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
 };
 
 export default Profile;
-
-export const getServerSideProps = async ({ req, query }) => {
-  const LOCAL_API = process.env.LOCAL_API_LINK;
-
-  const { token } = req.cookies;
-  const { username } = query;
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  const { data } = await request({
-    url: `/users?token=${token}`,
-  });
-
-  const { data: cuurentProfile } = await request({
-    url: `/users?username=${username}`,
-  });
-
-  if (!data?.length || !cuurentProfile?.length) {
-    return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
-    };
-  }
-
-  const { data: cuurentProfileStaticts } = await axios(
-    `${LOCAL_API}/getStaticts?username=${username}&token=${token}`
-  );
-
-  return {
-    props: {
-      userData: data[0],
-      cuurentProfile: cuurentProfile[0],
-      cuurentProfileStaticts: cuurentProfileStaticts,
-    },
-  };
-};

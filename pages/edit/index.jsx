@@ -5,6 +5,8 @@ import Layout from "../../layout";
 import EditForm from "../../components/EditForm";
 import request from "../../utils/request";
 
+import Head from "next/head";
+
 const NAVIGATE_TAPS = [
   "Edit Profile",
   "Professional Account",
@@ -21,29 +23,38 @@ const NAVIGATE_TAPS = [
 
 const edit = ({ userData }) => {
   return (
-    <Layout
-      username={userData.username}
-      avatar={userData?.avatar}
-      className="container pt-4"
-    >
-      <article className={`${style.editsContainer} border`}>
-        <nav className="navigate d-none d-md-block">
-          <ul className={`list-unstyled border m-0 ${style.ulNavigate}`}>
-            {NAVIGATE_TAPS.map((buttonText, idx) => (
-              <li className={`p-0 ${idx === 0 ? style.active : ""}`} key={idx}>
-                <button
-                  className={`${style.navBtn} $ py-3 ps-4 pe-5 text-start btn btn-light w-100 h-100 border-0`}
-                >
-                  {buttonText}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+    <>
+      <Head>
+        <title>Edit {userData.username} Profile</title>
+      </Head>
 
-        <EditForm userData={userData} />
-      </article>
-    </Layout>
+      <Layout
+        username={userData.username}
+        avatar={userData?.avatar}
+        className="container pt-4"
+      >
+        <article className={`${style.editsContainer} border`}>
+          <nav className="navigate d-none d-md-block">
+            <ul className={`list-unstyled border m-0 ${style.ulNavigate}`}>
+              {NAVIGATE_TAPS.map((buttonText, idx) => (
+                <li
+                  className={`p-0 ${idx === 0 ? style.active : ""}`}
+                  key={idx}
+                >
+                  <button
+                    className={`${style.navBtn} $ py-3 ps-4 pe-5 text-start btn btn-light w-100 h-100 border-0`}
+                  >
+                    {buttonText}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <EditForm userData={userData} />
+        </article>
+      </Layout>
+    </>
   );
 };
 

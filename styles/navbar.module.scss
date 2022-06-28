@@ -101,6 +101,42 @@
       z-index: 3;
       user-select: none;
     }
+
+    .resultContainer {
+      background-color: #fff;
+      height: 370px;
+      width: 150%;
+      left: 50%;
+      top: calc(100% + 12px);
+      transform: translateX(-50%);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -7px;
+        height: 14px;
+        width: 14px;
+        border: 1px solid #dee2e6;
+        background: #fff;
+        transform: translateX(-50%) rotate(45deg);
+        border-right: transparent;
+        border-bottom: transparent;
+      }
+
+      .result {
+        transition: 0.2s;
+        align-items: center;
+
+        &:first-of-type {
+          margin-top: 10px;
+        }
+
+        &:hover {
+          background-color: #f1f1f1;
+        }
+      }
+    }
   }
 
   .closeListsBackDrop {

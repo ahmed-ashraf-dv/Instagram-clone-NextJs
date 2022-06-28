@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import request from "../utils/request";
 import axios from "axios";
 
+import Head from "next/head";
+
 const Home = ({ userData, isLogin }) => {
   const { logout } = useAuth();
   const router = useRouter();
@@ -51,58 +53,71 @@ const Home = ({ userData, isLogin }) => {
   return (
     <>
       {isLogin ? (
-        <Layout
-          username={userData.username}
-          avatar={userData?.avatar}
-          className={`${style.homePage} container pt-4`}
-        >
-          <div className={`${style.postContainer}`}>
-            {isLoading ? (
-              <InfintyScroll
-                initData={initPosts}
-                loading={<LoadingSpinner />}
-                getNextPage={getMorePosts}
-                Component={Post}
-                IsEndComponent={
-                  <p className="text-muted d-block w-fit mx-auto">
-                    Posts finished 🐱‍🏍
-                  </p>
-                }
-              />
-            ) : (
-              <LoadingSpinner />
-            )}
-          </div>
+        <>
+          <Head>
+            <title>Home</title>
+          </Head>
 
-          <aside className={`${style.stickySide} d-none d-md-block`}>
-            <div className="data flex-center">
-              <Avatar
-                className="cu-pointer"
-                width={50}
-                src={userData?.avatar || "/default_avatar.webp"}
-                onClick={toProfile}
-              />
-
-              <div className="details ms-3">
-                <p
-                  onClick={toProfile}
-                  className="m-0 p-0 select-none username cu-pointer text-muted"
-                >
-                  {userData.username}
-                </p>
-
-                <p
-                  onClick={logout}
-                  className="m-0 p-0 logounBtn btn btn-link text-decoration-none"
-                >
-                  logout
-                </p>
-              </div>
+          <Layout
+            username={userData.username}
+            avatar={userData?.avatar}
+            className={`${style.homePage} container pt-4`}
+          >
+            <div className={`${style.postContainer}`}>
+              {isLoading ? (
+                <InfintyScroll
+                  initData={initPosts}
+                  loading={<LoadingSpinner />}
+                  getNextPage={getMorePosts}
+                  Component={Post}
+                  pageProps={{ clientUsername: userData.username }}
+                  IsEndComponent={
+                    <p className="text-muted d-block w-fit mx-auto">
+                      Posts finished 🐱‍🏍
+                    </p>
+                  }
+                />
+              ) : (
+                <LoadingSpinner />
+              )}
             </div>
-          </aside>
-        </Layout>
+
+            <aside className={`${style.stickySide} d-none d-md-block`}>
+              <div className="data flex-center">
+                <Avatar
+                  className="cu-pointer"
+                  width={50}
+                  src={userData?.avatar || "/default_avatar.webp"}
+                  onClick={toProfile}
+                />
+
+                <div className="details ms-3">
+                  <p
+                    onClick={toProfile}
+                    className="m-0 p-0 select-none username cu-pointer text-muted"
+                  >
+                    {userData.username}
+                  </p>
+
+                  <p
+                    onClick={logout}
+                    className="m-0 p-0 logounBtn btn btn-link text-decoration-none"
+                  >
+                    logout
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </Layout>
+        </>
       ) : (
-        <LoginForm isPage={false} />
+        <>
+          <Head>
+            <title>Login to continue</title>
+          </Head>
+
+          <LoginForm isPage={false} />
+        </>
       )}
     </>
   );

@@ -24,13 +24,25 @@ const Navbar = ({ avatar, username }) => {
     setAvatarList(false);
   };
 
+  const openNewPostModal = () => {
+    const payload = {
+      type: "New Post",
+      currentData: { username, avatar },
+    };
+
+    dispatch(openModal(payload));
+  };
+
   return (
     <>
       <div className="offsetTop" style={{ marginTop: navHeight }} />
       <nav className={`${style.mainNavbar} px-4`}>
         <div className="container-fluid flex-between align-items-center">
           <Link href="/">
-            <div className="brand cu-pointer">
+            <div
+              className="brand cu-pointer pe-1
+             p-md-0"
+            >
               <img src="/instagram.webp" width={100} alt="instagram" />
             </div>
           </Link>
@@ -64,16 +76,7 @@ const Navbar = ({ avatar, username }) => {
               </li>
 
               {/* New Post Icon */}
-              <li
-                onClick={() =>
-                  dispatch(
-                    openModal({
-                      type: "New Post",
-                      currentData: { username, avatar },
-                    })
-                  )
-                }
-              >
+              <li onClick={openNewPostModal}>
                 <svg
                   aria-label="New Post"
                   className="_8-yf5 "
@@ -185,7 +188,7 @@ const Navbar = ({ avatar, username }) => {
               hidden={!avatarList}
               onClick={closeListsHandelar}
               className={`${style.closeListsBackDrop}`}
-            ></div>
+            />
           </div>
         </div>
       </nav>

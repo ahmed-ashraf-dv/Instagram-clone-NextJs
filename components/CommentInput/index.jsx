@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "../../styles/modal.module.scss";
 
-const CommentInput = () => {
+const CommentInput = ({ focus, setFocus }) => {
   const [comment, setComment] = useState("");
+  const input = useRef();
+
+  // Foucs To Input
+  useEffect(() => {
+    if (focus) {
+      input.current.focus();
+      setFocus(false);
+    }
+  }, [focus, setFocus]);
 
   return (
     <div className={`${style.inputNewComment} border`}>
@@ -14,6 +23,7 @@ const CommentInput = () => {
           Send
         </button>
         <input
+          ref={input}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           className="text-end w-100 border-0"

@@ -7,10 +7,15 @@ import SignForm from "../../components/SignForm";
 import Link from "next/link";
 
 import request from "../../utils/request";
+import Head from "next/head";
 
 const Sign = () => {
   return (
     <>
+      <Head>
+        <title>signup</title>
+      </Head>
+
       <section className={`${style.loginForm}  flex-center container`}>
         <div className={`${style.column}`}>
           <SignForm />

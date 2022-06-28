@@ -22,10 +22,11 @@ const AvatarTap = ({
 
       <motion.article
         onClick={closeListsHandelar}
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 0, display: "none" }}
         animate={{
           opacity: avatarList ? 1 : 0,
           y: avatarList ? 2 : -5,
+          display: avatarList ? "block" : "none",
         }}
         transition={{ duration: 0.2 }}
       >

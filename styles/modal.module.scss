@@ -116,9 +116,7 @@
           background-color: #000;
 
           & > img {
-            @media (max-width: 867px) {
-              object-fit: contain;
-            }
+            object-fit: contain;
           }
 
           .loverHeart {
@@ -236,6 +234,13 @@
           display: none !important;
         }
       }
+    }
+
+    &.editModal {
+      z-index: 99999999;
+      max-width: 400px;
+      border-radius: 5px;
+      padding: 0 !important;
     }
   }
 }

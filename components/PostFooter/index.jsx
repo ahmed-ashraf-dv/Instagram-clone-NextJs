@@ -9,6 +9,8 @@ const PostFooter = ({
   createdAt,
   isLike = false,
   disLike,
+  focusInput,
+  openPost,
 }) => {
   const [state, setState] = useState({
     isSave: false,
@@ -117,7 +119,7 @@ const PostFooter = ({
             </svg>
           </div>
 
-          <div className="comment cu-pointer">
+          <div onClick={focusInput || openPost} className="comment cu-pointer">
             <svg
               aria-label="Suspension"
               className="_ab6-"

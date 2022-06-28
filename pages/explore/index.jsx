@@ -9,6 +9,7 @@ import style from "../../styles/explore.module.scss";
 
 import axios from "axios";
 import request from "../../utils/request";
+import Head from "next/head";
 
 const Explore = ({ userData }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,28 +35,35 @@ const Explore = ({ userData }) => {
   }, [getMorePosts]);
 
   return (
-    <Layout
-      username={userData.username}
-      avatar={userData?.avatar}
-      className="container-fluid p-4"
-    >
-      {isLoading ? (
-        <InfintyScroll
-          className={`row ${style.imgRow}`}
-          initData={initPosts}
-          loading={<LoadingSpinner />}
-          getNextPage={getMorePosts}
-          Component={PostThumbnail}
-          IsEndComponent={
-            <p className="text-muted d-block w-fit mx-auto">
-              Posts finished 🐱‍🏍
-            </p>
-          }
-        />
-      ) : (
-        <LoadingSpinner />
-      )}
-    </Layout>
+    <>
+      <Head>
+        <title>explore</title>
+      </Head>
+
+      <Layout
+        username={userData.username}
+        avatar={userData?.avatar}
+        className="container-fluid p-4"
+      >
+        {isLoading ? (
+          <InfintyScroll
+            className={`row ${style.imgRow}`}
+            initData={initPosts}
+            loading={<LoadingSpinner />}
+            getNextPage={getMorePosts}
+            Component={PostThumbnail}
+            pageProps={{ cuurentUsername: userData.username }}
+            IsEndComponent={
+              <p className="text-muted d-block w-fit mx-auto">
+                Posts finished 🐱‍🏍
+              </p>
+            }
+          />
+        ) : (
+          <LoadingSpinner />
+        )}
+      </Layout>
+    </>
   );
 };
 

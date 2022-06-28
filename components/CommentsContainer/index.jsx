@@ -7,13 +7,18 @@ import LoadingSpinner from "../LoadingSpinner";
 import InfintyScroll from "../InfintyScroll";
 import Comment from "./Comment";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal } from "../../store/ModalSlice";
+import { useRouter } from "next/router";
 
 const CommentsContainer = () => {
   const [comments, setComments] = useState([]);
   const [loadingComments, setLoadingComments] = useState(true);
 
   const { currentData } = useSelector(({ ModalSlice }) => ModalSlice);
+
+  const route = useRouter();
+  const dispatch = useDispatch();
 
   const getMoreComments = useCallback((id) => {
     const posts = axios(`/api/getComments/${id}?amount=20&num=1`).then(
@@ -32,6 +37,11 @@ const CommentsContainer = () => {
     });
   }, [getMoreComments, currentData]);
 
+  const openProfile = () => {
+    dispatch(closeModal());
+    route.push(`/profile/${currentData?.user?.username}`);
+  };
+
   return (
     <div className={`${style.commentsContainer}`}>
       <div className="puplisher-comment d-flex justify-content-end gap-1 p-3">
@@ -39,11 +49,14 @@ const CommentsContainer = () => {
           <p className="text-end">{currentData?.caption}</p>
         </div>
 
-        <div className="me-2 ms-2 details flex-center flex-column">
+        <div
+          className="me-2 ms-2 details flex-center flex-column cu-pointer"
+          onClick={openProfile}
+        >
           <p className={`${style.username}`}>• {currentData?.user?.username}</p>
         </div>
 
-        <div className="avatar">
+        <div className="avatar cu-pointer" onClick={openProfile}>
           <Avatar src={currentData?.user?.avatar} />
         </div>
       </div>

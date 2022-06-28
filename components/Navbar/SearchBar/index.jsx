@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import style from "../../styles/navbar.module.scss";
+import style from "../../../styles/navbar.module.scss";
+import ResultContainer from "./ResultContainer";
 
 const SearchBar = () => {
   const searchQuery = useRef();
@@ -31,7 +32,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className={`${style.searchBar} d-none d-md-block`}>
+    <div className={`${style.searchBar} d-none d-md-block position-relative`}>
       <label
         htmlFor="query"
         hidden={query}
@@ -87,6 +88,8 @@ const SearchBar = () => {
       >
         <span>X</span>
       </div>
+
+      {query && queryFocus && <ResultContainer query={query} />}
     </div>
   );
 };

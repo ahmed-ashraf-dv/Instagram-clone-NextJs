@@ -1,9 +1,18 @@
 import React from "react";
 import LoginForm from "../../components/LoginForm";
-import axios from "axios";
+
+import Head from "next/head";
 
 const LoginPage = () => {
-  return <LoginForm isPage={true} />;
+  return (
+    <>
+      <Head>
+        <title>Login</title>
+      </Head>
+
+      <LoginForm isPage={true} />
+    </>
+  );
 };
 
 export default LoginPage;

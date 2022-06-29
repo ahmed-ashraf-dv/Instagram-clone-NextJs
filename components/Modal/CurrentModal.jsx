@@ -1,6 +1,8 @@
 import React from "react";
+
 import NewPostModal from "./Modals/NewPostModals";
 import PreviewPostModal from "./Modals/PreviewPostModal";
+import ShowUsersModal from "./Modals/ShowUsersModal";
 
 const CurrentModal = ({ type }) => {
   return (
@@ -9,6 +11,8 @@ const CurrentModal = ({ type }) => {
         <NewPostModal />
       ) : type === "Preview Post" ? (
         <PreviewPostModal />
+      ) : type === "Followers" || type === "Following" ? (
+        <ShowUsersModal />
       ) : (
         ""
       )}

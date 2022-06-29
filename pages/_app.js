@@ -12,10 +12,6 @@ import EditPostModal from "../components/Modal/EditPostModal";
 const MyApp = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
-      <Head>
-        <link rel="icon" type="image/x-icon" href="/icons/instgram.webp"></link>
-      </Head>
-
       {/* Modals */}
       <Modal />
       <EditPostModal />

@@ -124,6 +124,7 @@
 
             img {
               transform: scale(0);
+              opacity: 0.9;
 
               &.heart {
                 animation: like 1.1s;
@@ -188,7 +189,7 @@
             justify-content: center;
             align-items: center;
 
-            form {
+            & > div {
               width: 100%;
 
               input {
@@ -241,6 +242,21 @@
       max-width: 400px;
       border-radius: 5px;
       padding: 0 !important;
+    }
+
+    &.showUsersModal {
+      max-width: 400px;
+      border-radius: 8px;
+      height: 250px;
+      overflow-y: auto;
+      position: relative;
+
+      .stickyHeader {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 99;
+      }
     }
   }
 }

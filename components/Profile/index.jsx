@@ -121,6 +121,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
             posts={staticts.posts || 0}
             followers={staticts.followers || 0}
             following={staticts.following || 0}
+            username={cuurentProfile.username}
           />
           <SaveWordSize
             caption={cuurentProfile.bio || "No caption"}

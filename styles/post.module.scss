@@ -1,6 +1,6 @@
 .post {
   background-color: #fff;
-  width: 85%;
+  width: 100%;
   max-width: 480px;
   border-radius: 5px;
   margin: auto;
@@ -14,6 +14,7 @@
 
       img {
         transform: scale(0);
+        opacity: 0.9;
 
         &.heart {
           animation: like 1.1s;

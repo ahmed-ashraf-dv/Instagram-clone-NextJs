@@ -51,7 +51,7 @@ const EditPost = () => {
     isOpen && (
       <div className={`${style.modalBox}`}>
         <div
-          onClick={() => dispatch(closeModal())}
+          onClick={() => dispatch(closeEditModal())}
           className={`${style.backDrop} flex-center`}
         />
 

@@ -19,6 +19,8 @@ const Modal = () => {
       ? style.newPost
       : type === "Preview Post"
       ? style.previewPost + " align-items-start"
+      : type === "Followers" || type === "Following"
+      ? style.showUsersModal + " align-items-start"
       : "";
   };
 

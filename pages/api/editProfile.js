@@ -9,12 +9,17 @@ const handler = async (req, res) => {
 
   // Check if username is available
   if (newData.username) {
-    const { data } = await request(`/users?username=${newData.username}`);
+    try {
+      const { data } = await request(`/users?username=${newData.username}`);
 
-    if (data?.length) {
-      return res
-        .status(200)
-        .json({ code: 400, message: "username not available" });
+      if (data?.length) {
+        return res
+          .status(200)
+          .json({ code: 400, message: "username not available" });
+      }
+    } catch (err) {
+      //
+      return res.status(200).json({ code: 400, message: err.message });
     }
   }
 

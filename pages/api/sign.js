@@ -24,7 +24,7 @@ const getRandomAvatar = () => {
   const avatarName = "default_avatar";
   const randomNum = Math.ceil(Math.random() * NUM_OF_DEFAULT_AVATARS);
 
-  return `/${avatarName + randomNum}.webp`;
+  return `/avatars/${avatarName + randomNum}.webp`;
 };
 
 const handler = async (req, res) => {

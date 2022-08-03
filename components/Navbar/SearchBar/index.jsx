@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useEffect } from "react";
 import style from "../../../styles/navbar.module.scss";
 import ResultContainer from "./ResultContainer";
 
@@ -7,6 +8,7 @@ const SearchBar = () => {
   const [queryFocus, setQueryFocus] = useState(false);
   const [query, setQuery] = useState("");
   const [cancelBtnState, setCancelBtnState] = useState(false);
+  const [isShowResultConatiner, setIsShowResultConatiner] = useState(false);
 
   const onBlurHandelar = () => {
     setQueryFocus(false);
@@ -18,6 +20,7 @@ const SearchBar = () => {
   const onFoucsHandelar = () => {
     setQueryFocus(true);
     setCancelBtnState(true);
+    setIsShowResultConatiner(true);
   };
 
   const onChangeHandelar = (e) => {
@@ -30,6 +33,13 @@ const SearchBar = () => {
 
     searchQuery.current.blur();
   };
+
+  // hide ResultContainer after blur
+  useEffect(() => {
+    if (queryFocus) return;
+
+    setTimeout(() => setIsShowResultConatiner(false), 200);
+  }, [queryFocus]);
 
   return (
     <div className={`${style.searchBar} d-none d-md-block position-relative`}>
@@ -89,7 +99,7 @@ const SearchBar = () => {
         <span>X</span>
       </div>
 
-      {query && queryFocus && <ResultContainer query={query} />}
+      {query && isShowResultConatiner && <ResultContainer query={query} />}
     </div>
   );
 };

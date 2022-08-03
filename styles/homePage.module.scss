@@ -2,7 +2,11 @@
   .stickySide {
     position: fixed;
     top: 100px;
-    right: 250px;
+    right: 27vw;
+
+    @media (max-width: 905px) {
+      display: none !important;
+    }
   }
 
   .postContainer {

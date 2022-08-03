@@ -61,7 +61,7 @@ const Home = ({ userData, isLogin }) => {
           <Layout
             username={userData.username}
             avatar={userData?.avatar}
-            className={`${style.homePage} container pt-4`}
+            className={`${style.homePage} container-fluid pt-4 ps-md-4 `}
           >
             <div className={`${style.postContainer}`}>
               {isLoading ? (

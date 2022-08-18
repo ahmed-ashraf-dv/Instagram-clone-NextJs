@@ -87,7 +87,7 @@ const Home = ({ userData, isLogin }) => {
                 <Avatar
                   className="cu-pointer"
                   width={50}
-                  src={userData?.avatar || "/default_avatar.webp"}
+                  src={userData?.avatar}
                   onClick={toProfile}
                 />
 
@@ -136,11 +136,9 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const { data } = await request({
-    url: `/users?token=${token}`,
-  });
+  const { data } = await request.post(`/user-data-with-token?token=${token}`);
 
-  if (!data.length) {
+  if (data.code != 200) {
     return {
       props: {
         isLogin: false,
@@ -150,7 +148,7 @@ export const getServerSideProps = async ({ req }) => {
 
   return {
     props: {
-      userData: data[0],
+      userData: data.user,
       isLogin: true,
     },
   };

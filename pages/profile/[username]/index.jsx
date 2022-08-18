@@ -21,7 +21,7 @@ const ProfileRoute = (props) => {
 export default ProfileRoute;
 
 export const getServerSideProps = async ({ req, query }) => {
-  const LOCAL_API = process.env.LOCAL_API_LINK;
+  const LOCAL_API = process.env.NEXT_PUBLIC_LOCAL_API_LINK;
 
   const { token } = req.cookies;
   const { username } = query;
@@ -35,15 +35,15 @@ export const getServerSideProps = async ({ req, query }) => {
     };
   }
 
-  const { data } = await request({
-    url: `/users?token=${token}`,
+  const { data: userData } = await request({
+    url: `/user-data?token=${token}`,
   });
 
   const { data: cuurentProfile } = await request({
-    url: `/users?username=${username}`,
+    url: `/user-data?username=${username}`,
   });
 
-  if (!data?.length || !cuurentProfile?.length) {
+  if (userData.code != 200 || cuurentProfile.code != 200) {
     return {
       redirect: {
         destination: "/404",
@@ -58,9 +58,9 @@ export const getServerSideProps = async ({ req, query }) => {
 
   return {
     props: {
-      userData: data[0],
-      cuurentProfile: cuurentProfile[0],
-      cuurentProfileStaticts: cuurentProfileStaticts,
+      userData: userData.user,
+      cuurentProfile: cuurentProfile.user,
+      cuurentProfileStaticts,
     },
   };
 };

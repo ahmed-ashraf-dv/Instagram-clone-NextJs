@@ -3,37 +3,13 @@ import request from "../../../utils/request";
 const handler = async (req, res) => {
   const { id } = req.query;
 
-  const { data: post } = await request({
-    url: `/posts?id=${id}`,
-  });
+  const { data: post } = await request(`/getById/${id}`);
 
-  if (!post?.length) {
-    return res.status(404).json({ code: 404, message: "post not found" });
+  if (post.code != 200) {
+    return res.status(200).json({ code: 400, message: "post not found" });
   }
 
-  const { userId } = post[0];
-
-  // Get user puplisher
-  const { data: userData } = await request({
-    url: `/users?id=${userId}`,
-  });
-
-  if (!userData?.length) {
-    return res.status(404).json({ code: 404, message: "user not found" });
-  }
-
-  const { username, avatar } = userData[0];
-
-  const postData = {
-    ...post[0],
-
-    user: {
-      username,
-      avatar,
-    },
-  };
-
-  res.status(200).json({ code: 200, post: postData || null });
+  res.status(200).json(post);
 };
 
 export default handler;

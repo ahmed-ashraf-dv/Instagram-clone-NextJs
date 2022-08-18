@@ -43,7 +43,7 @@ const Explore = ({ userData }) => {
       <Layout
         username={userData.username}
         avatar={userData?.avatar}
-        className="container-fluid p-4"
+        className={`container ${style.maxWidth_container} p-4`}
       >
         {isLoading ? (
           <InfintyScroll
@@ -81,11 +81,9 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const { data } = await request({
-    url: `/users?token=${token}`,
-  });
+  const { data } = await request.post(`/user-data-with-token?token=${token}`);
 
-  if (!data.length) {
+  if (data.code != 200) {
     return {
       redirect: {
         destination: "/",
@@ -94,5 +92,5 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  return { props: { userData: data[0] } };
+  return { props: { userData: data.user } };
 };

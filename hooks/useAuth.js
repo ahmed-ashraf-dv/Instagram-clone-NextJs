@@ -17,7 +17,7 @@ const useAuth = () => {
         return router.push("/login");
       }
 
-      onError(data.message);
+      onError(data?.message || data?.msg || "unknown error");
     } catch (err) {
       onError(err.message);
     }
@@ -35,7 +35,7 @@ const useAuth = () => {
         return router.push("/");
       }
 
-      onError(data.message);
+      onError(data?.message || data?.msg || "unknown error");
     } catch (err) {
       onError(err.message);
     }
@@ -65,7 +65,7 @@ const useAuth = () => {
       }
 
       if (data.code !== 200) {
-        onError(data.message);
+        onError(data?.message || data?.msg || "unknown error");
       }
     } catch (err) {
       onError(err.message);

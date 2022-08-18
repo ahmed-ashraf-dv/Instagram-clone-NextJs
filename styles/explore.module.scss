@@ -1,12 +1,16 @@
+.maxWidth_container {
+  max-width: 900px;
+}
+
 .imgRow {
   row-gap: 0.6rem;
 
   .imgBox {
     position: relative;
-    position: relative;
     width: fit-content;
     max-height: 300px;
     margin: auto;
+    height: fit-content;
 
     img {
       width: 100%;

@@ -22,3 +22,8 @@ a {
 button {
   box-shadow: none !important;
 }
+
+.container,
+.container-fluid {
+  max-width: 900px;
+}

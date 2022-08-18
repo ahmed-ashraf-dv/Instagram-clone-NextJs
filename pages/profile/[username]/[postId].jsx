@@ -24,7 +24,7 @@ const PostRoute = ({
       caption: post.caption,
       user: post.user,
       createdAt: post.createdAt,
-      postId: post.id,
+      postId: post.postId,
       cuurentUsername: userData.username,
     };
 
@@ -54,29 +54,20 @@ const PostRoute = ({
 export default PostRoute;
 
 export const getServerSideProps = async ({ req, query }) => {
-  const LOCAL_API = process.env.LOCAL_API_LINK;
+  const LOCAL_API = process.env.NEXT_PUBLIC_LOCAL_API_LINK;
 
   const { token } = req.cookies;
   const { username, postId } = query;
 
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  const { data } = await request({
-    url: `/users?token=${token}`,
-  });
+  const { data: userData } = await request.post(
+    `/user-data-with-token?token=${token}`
+  );
 
   const { data: cuurentProfile } = await request({
-    url: `/users?username=${username}`,
+    url: `/user-data?username=${username}`,
   });
 
-  if (!data?.length || !cuurentProfile?.length) {
+  if (userData.code != 200 || cuurentProfile.code != 200) {
     return {
       redirect: {
         destination: "/404",
@@ -90,11 +81,10 @@ export const getServerSideProps = async ({ req, query }) => {
   );
 
   // Get Post Id Data
-  const { data: postData } = await axios(`${LOCAL_API}/getPostById/${postId}`);
-  const { post } = postData;
+  const { data: post } = await axios(`${LOCAL_API}/getPostById/${postId}`);
 
   // Check if avilabel Post
-  if (!post) {
+  if (post.code !== 200) {
     return {
       redirect: {
         destination: "/404",
@@ -104,7 +94,7 @@ export const getServerSideProps = async ({ req, query }) => {
   }
 
   // Check if username his is publisher
-  if (post.userId !== cuurentProfile[0]?.id) {
+  if (post.user_id !== cuurentProfile?._id) {
     return {
       redirect: {
         destination: `/profile/${username}`,
@@ -115,10 +105,10 @@ export const getServerSideProps = async ({ req, query }) => {
 
   return {
     props: {
-      userData: data[0],
-      cuurentProfile: cuurentProfile[0],
-      cuurentProfileStaticts: cuurentProfileStaticts,
-      post: post,
+      userData: userData.user,
+      cuurentProfile: cuurentProfile.user,
+      cuurentProfileStaticts,
+      post: post.post,
     },
   };
 };

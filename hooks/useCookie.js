@@ -19,15 +19,16 @@ const useCookie = () => {
     const decodedCookie = decodeURIComponent(window.document.cookie);
     const splitingCookie = decodedCookie.split(";");
 
-    const [currentCookie] = splitingCookie.map((cookie) => {
-      cookie.replace(" ", "");
+    let currentCookie = "";
+    splitingCookie.forEach((cookie) => {
+      cookie = cookie.replaceAll(" ", "");
 
       if (cookie.indexOf(name) === 0) {
-        return cookie.substring(name.length, cookie.length);
+        return (currentCookie = cookie.substring(name.length, cookie.length));
       }
     });
 
-    return currentCookie || undefined;
+    return currentCookie;
   };
 
   const set = ({ name, value, exDays = "", path = "/" }) => {

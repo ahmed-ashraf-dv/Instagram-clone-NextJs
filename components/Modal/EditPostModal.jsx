@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import style from "../../styles/modal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 import { closeModal as closeEditModal } from "../../store/EditPostModalSlice";
 import { closeModal as closePreviewModal } from "../../store/ModalSlice";
@@ -12,6 +13,7 @@ import copy from "../../utils/copy";
 import useCookie from "../../hooks/useCookie";
 
 const EditPost = () => {
+  const router = useRouter();
   const { isOpen, isPuplisher, link } = useSelector(
     ({ EditPostModalSlice }) => EditPostModalSlice
   );
@@ -39,9 +41,12 @@ const EditPost = () => {
       `/api/delpost/${postId}?token=${token}`
     );
 
+    console.log(data.code);
+
     if (data.code === 200) {
       dispatch(closePreviewModal());
       dispatch(closeEditModal());
+      router.push("/");
     } else {
       alert(data.message);
     }

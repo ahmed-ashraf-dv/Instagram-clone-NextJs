@@ -6,8 +6,11 @@ import Avatar from "../../../Avatar";
 import { closeModal } from "../../../../store/ModalSlice";
 import { useDispatch } from "react-redux";
 
+const server = process.env.NEXT_PUBLIC_API_LINK;
+
 const UserCard = ({ data }) => {
   const dispatch = useDispatch();
+  console.log(data);
 
   const sliceBio = (bio) => {
     const BIO_SIZE = 10;

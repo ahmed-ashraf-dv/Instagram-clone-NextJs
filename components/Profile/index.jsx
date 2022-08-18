@@ -35,7 +35,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
   const getMorePosts = useCallback(
     async (pageNum) => {
       const posts = axios(
-        `/api/getPostsById/${cuurentProfile.id}?num=${pageNum}&amount=12`
+        `/api/getPostsById/${cuurentProfile._id}?num=${pageNum}&amount=12`
       ).then(({ data }) => {
         const { posts } = data;
 
@@ -103,10 +103,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
     >
       <div className="personal-data d-block text-center text-md-start d-md-flex my-5 pt-3 pb-1 p-md-3 p-md-5 m-md-5 gap-5">
         <div className="avatar">
-          <Avatar
-            width={150}
-            src={cuurentProfile.avatar || "/default_avatar.webp"}
-          />
+          <Avatar width={150} src={cuurentProfile.avatar} />
         </div>
         <div className="data">
           <ProfileHeader
@@ -140,7 +137,10 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
           loading={<LoadingSpinner />}
           getNextPage={getMorePosts}
           Component={PostThumbnail}
-          pageProps={{ cuurentUsername: userData.username }}
+          pageProps={{
+            cuurentUsername: userData.username,
+            cuurentUser: cuurentProfile,
+          }}
         />
       ) : (
         <LoadingSpinner />

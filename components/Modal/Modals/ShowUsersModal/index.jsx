@@ -30,21 +30,16 @@ const ShowUsersModal = () => {
         `/api/${route}/${cuurentUsername}?num=${pageNum}&amount=5`
       );
 
-      const { users } = usersData;
+      const { followers } = usersData;
 
-      return users;
+      return followers;
     },
     [type, cuurentUsername]
   );
 
   useEffect(() => {
     getUsers(1).then((users) => {
-      const orderByDate = (array) =>
-        array.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-
-      setInitPosts(orderByDate(users));
+      setInitPosts(users);
       setIsLoading(true);
     });
   }, [getUsers]);

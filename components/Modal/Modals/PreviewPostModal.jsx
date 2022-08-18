@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../../store/ModalSlice";
 import { useRouter } from "next/router";
 
+const server = process.env.NEXT_PUBLIC_API_LINK;
+
 const PreviewPostModal = () => {
   const { currentData } = useSelector(({ ModalSlice }) => ModalSlice);
   const [isLove, setisLove] = useState(false);
@@ -88,7 +90,7 @@ const PreviewPostModal = () => {
             />
           </div>
 
-          <img className="w-100 h-100" src={currentData?.img} alt="" />
+          <img className="w-100 h-100" src={server + currentData?.img} alt="" />
         </div>
       </div>
     </div>

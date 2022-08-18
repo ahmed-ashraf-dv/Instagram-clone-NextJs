@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 
 const InfintyScroll = ({
@@ -9,7 +10,7 @@ const InfintyScroll = ({
   className = "",
   pageProps = {},
 }) => {
-  const elment = useRef();
+  const elment = useRef(null);
 
   const [pageNum, setPageNum] = useState(1);
   const [data, setData] = useState();
@@ -17,6 +18,25 @@ const InfintyScroll = ({
   const [isEndData, setIsEndData] = useState(false);
 
   const [startScroll, setStartScroll] = useState(false);
+
+  useEffect(() => {
+    if (!elment.current.clientHeight) return;
+
+    window.onscroll = () => {
+      setStartScroll(true);
+
+      const elmentHeight = elment.current.clientHeight;
+      const currentScroll = window.scrollY + window.innerHeight;
+
+      const persent = (currentScroll * 100) / elmentHeight; // (%)
+
+      // 80%
+      if (persent >= 80 && isLoaded) {
+        setIsLoaded(false);
+        setPageNum((prev) => prev + 1);
+      }
+    };
+  });
 
   useEffect(() => {
     setData(initData);
@@ -41,23 +61,6 @@ const InfintyScroll = ({
 
     pageniationHandelar();
   }, [pageNum, isLoaded, getNextPage, isEndData]);
-
-  if (typeof window !== "undefined") {
-    window.onscroll = () => {
-      setStartScroll(true);
-
-      const elmentHeight = elment.current?.scrollHeight;
-      const currentScroll = window.scrollY + window.innerHeight;
-
-      const persent = (currentScroll * 100) / elmentHeight; // (%)
-
-      // 80%
-      if (persent >= 80 && isLoaded) {
-        setIsLoaded(false);
-        setPageNum((prev) => prev + 1);
-      }
-    };
-  }
 
   return (
     <main ref={elment} className={`infinty-scroll-elment ${className}`}>

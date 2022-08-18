@@ -18,7 +18,10 @@ const AvatarTap = ({
 
   return (
     <>
-      <Avatar onClick={() => setAvatarList((prev) => !prev)} src={avatar} />
+      <Avatar
+        onClick={() => username && setAvatarList((prev) => !prev)}
+        src={avatar}
+      />
 
       <motion.article
         onClick={closeListsHandelar}

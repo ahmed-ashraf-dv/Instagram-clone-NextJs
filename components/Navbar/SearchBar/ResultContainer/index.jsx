@@ -60,7 +60,6 @@ const ResultContainer = ({ query }) => {
           <LoadingSpinner />
         </div>
       )}
-      {}
     </div>
   );
 };

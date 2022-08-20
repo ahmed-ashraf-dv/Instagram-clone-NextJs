@@ -8,7 +8,6 @@ const EditPostBtn = ({
   clientUsername,
   puplisherUsername,
   style = {},
-  noDel = false
 }) => {
   const dispatch = useDispatch();
 
@@ -18,7 +17,6 @@ const EditPostBtn = ({
       openModal({
         isPuplisher: puplisherUsername === clientUsername,
         link: `profile/${puplisherUsername}/${postId}`,
-        noDel
       })
     );
   };

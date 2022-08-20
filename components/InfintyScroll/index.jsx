@@ -20,18 +20,18 @@ const InfintyScroll = ({
   const [startScroll, setStartScroll] = useState(false);
 
   useEffect(() => {
-    if (!elment.current.clientHeight) return;
+    if (!elment.current?.clientHeight) return;
 
     window.onscroll = () => {
       setStartScroll(true);
 
-      const elmentHeight = elment.current.clientHeight;
+      const elmentHeight = elment.current?.clientHeight;
       const currentScroll = window.scrollY + window.innerHeight;
 
       const persent = (currentScroll * 100) / elmentHeight; // (%)
 
       // 80%
-      if (persent >= 80 && isLoaded) {
+      if (persent >= 80 && isLoaded && elmentHeight && currentScroll) {
         setIsLoaded(false);
         setPageNum((prev) => prev + 1);
       }

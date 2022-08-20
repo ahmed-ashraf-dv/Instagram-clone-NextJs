@@ -14,10 +14,10 @@ import useCookie from "../../hooks/useCookie";
 
 const EditPost = () => {
   const router = useRouter();
-  const { isOpen, isPuplisher, link, noDel } = useSelector(
+  const { isOpen, isPuplisher, link } = useSelector(
     ({ EditPostModalSlice }) => EditPostModalSlice
   );
-  
+
   const dispatch = useDispatch();
   const cookie = useCookie();
 
@@ -68,7 +68,7 @@ const EditPost = () => {
             <li onClick={copyLink} className="cu-pointer p-2">
               <p>Copy link</p>
             </li>
-            {isPuplisher && !noDel && (
+            {isPuplisher && (
               <li
                 onClick={deletePost}
                 className="cu-pointer p-2 border border-bottom-0 border-start-0 border-end-0"

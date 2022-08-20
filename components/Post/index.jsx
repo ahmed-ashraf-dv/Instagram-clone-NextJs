@@ -46,6 +46,7 @@ const Post = ({ data, clientUsername, isVerified }) => {
         avatar={data.user?.avatar}
         username={data.user?.username}
         postId={data.id}
+        noDel={true}
       />
       <PostMain setisLove={setisLove} img={data.img} />
       <PostFooter

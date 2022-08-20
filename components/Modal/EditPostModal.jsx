@@ -32,7 +32,6 @@ const EditPost = () => {
   const deletePost = async () => {
     const splitLink = link.split("/");
     const linkWithoutEmpty = splitLink.filter((string) => string);
-    console.log(linkWithoutEmpty)
 
     const postId = linkWithoutEmpty.at(-1);
     const token = cookie.get("token");
@@ -41,8 +40,6 @@ const EditPost = () => {
     const { data } = await axios.delete(
       `/api/delpost/${postId}?token=${token}`
     );
-
-    console.log(data.code);
 
     if (data.code === 200) {
       dispatch(closePreviewModal());

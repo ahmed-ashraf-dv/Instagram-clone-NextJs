@@ -17,6 +17,8 @@ import axios from "axios";
 import Head from "next/head";
 
 const Home = ({ userData, isLogin }) => {
+      console.log(process.env.NEXT_PUBLIC_API_LINK)
+
   const { logout } = useAuth();
   const router = useRouter();
 

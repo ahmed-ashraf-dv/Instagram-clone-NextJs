@@ -8,7 +8,7 @@ const EditPostBtn = ({
   clientUsername,
   puplisherUsername,
   style = {},
-  noDel = false;
+  noDel = false
 }) => {
   const dispatch = useDispatch();
 

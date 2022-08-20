@@ -32,6 +32,7 @@ const EditPost = () => {
   const deletePost = async () => {
     const splitLink = link.split("/");
     const linkWithoutEmpty = splitLink.filter((string) => string);
+    console.log(linkWithoutEmpty)
 
     const postId = linkWithoutEmpty.at(-1);
     const token = cookie.get("token");

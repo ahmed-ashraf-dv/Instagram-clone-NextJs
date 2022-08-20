@@ -8,16 +8,17 @@ const EditPostBtn = ({
   clientUsername,
   puplisherUsername,
   style = {},
+  noDel = false;
 }) => {
   const dispatch = useDispatch();
 
   const openEditModal = () => {
-console.log(postId)
     // if this puplisher
     dispatch(
       openModal({
         isPuplisher: puplisherUsername === clientUsername,
         link: `profile/${puplisherUsername}/${postId}`,
+        noDel={noDel}
       })
     );
   };

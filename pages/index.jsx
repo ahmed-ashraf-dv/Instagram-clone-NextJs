@@ -70,7 +70,10 @@ const Home = ({ userData, isLogin }) => {
                   loading={<LoadingSpinner />}
                   getNextPage={getMorePosts}
                   Component={Post}
-                  pageProps={{ clientUsername: userData.username }}
+                  pageProps={{
+                    clientUsername: userData.username,
+                    isVerified: userData.isVerified,
+                  }}
                   IsEndComponent={
                     <p className="text-muted d-block w-fit mx-auto">
                       Posts finished 🐱‍🏍
@@ -92,12 +95,21 @@ const Home = ({ userData, isLogin }) => {
                 />
 
                 <div className="details ms-3">
-                  <p
-                    onClick={toProfile}
-                    className="m-0 p-0 select-none username cu-pointer text-muted"
-                  >
-                    {userData.username}
-                  </p>
+                  <div className="user-data flex-center">
+                    <p
+                      onClick={toProfile}
+                      className="m-0 p-0 select-none username cu-pointer text-muted"
+                    >
+                      {userData.username}
+                    </p>
+
+                    {userData.isVerified && (
+                      <span
+                        style={{ transform: "scale(.8)" }}
+                        className="verified ms-1 mt-1"
+                      />
+                    )}
+                  </div>
 
                   <p
                     onClick={logout}

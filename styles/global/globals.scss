@@ -27,3 +27,11 @@ button {
 .container-fluid {
   max-width: 900px;
 }
+
+.verified {
+  background-image: url("../../public/verified.png");
+  background-repeat: no-repeat;
+  background-position: 0 -369px;
+  height: 18px;
+  width: 18px;
+}

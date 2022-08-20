@@ -18,7 +18,7 @@ const EditPostBtn = ({
       openModal({
         isPuplisher: puplisherUsername === clientUsername,
         link: `profile/${puplisherUsername}/${postId}`,
-        noDel={noDel}
+        noDel
       })
     );
   };

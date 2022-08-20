@@ -10,6 +10,7 @@ const PostHeader = ({
   postId,
   clientUsername,
   isVerified,
+  noDel
 }) => {
   return (
     <header className="flex-between m-2">
@@ -31,6 +32,7 @@ const PostHeader = ({
       </Link>
 
       <EditPostBtn
+        noDel={noDel}
         postId={postId}
         clientUsername={clientUsername}
         puplisherUsername={username}

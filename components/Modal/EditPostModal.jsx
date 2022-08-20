@@ -18,8 +18,6 @@ const EditPost = () => {
     ({ EditPostModalSlice }) => EditPostModalSlice
   );
   
-  console.log( isOpen, isPuplisher, link, noDel)
-
   const dispatch = useDispatch();
   const cookie = useCookie();
 

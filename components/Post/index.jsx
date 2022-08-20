@@ -14,7 +14,7 @@ import { openModal } from "../../store/ModalSlice";
 
 const CAPTION_SIZE = 100;
 
-const Post = ({ data, clientUsername }) => {
+const Post = ({ data, clientUsername, isVerified }) => {
   const [isLove, setisLove] = useState(false);
 
   const dispatch = useDispatch();
@@ -41,6 +41,7 @@ const Post = ({ data, clientUsername }) => {
   return (
     <article className={`${style.post} border ms-md-4 mb-4`}>
       <PostHeader
+        isVerified={isVerified}
         clientUsername={clientUsername}
         avatar={data.user?.avatar}
         username={data.user?.username}

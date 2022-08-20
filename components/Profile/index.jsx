@@ -107,6 +107,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
         </div>
         <div className="data">
           <ProfileHeader
+            isVerified={cuurentProfile.isVerified}
             isFollowed={isFollowed}
             isFollowedLoading={isFollowedLoading}
             MyProfile={cuurentProfile.username === userData.username}

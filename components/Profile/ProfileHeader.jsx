@@ -6,14 +6,19 @@ const ProfileHeader = ({
   MyProfile,
   isFollowed,
   isFollowedLoading,
+  isVerified,
   followHandelar,
   followLoading,
 }) => {
   return (
     <header className="d-block d-md-flex align-items-center gap-4 mb-3">
-      <p className="m-2 m-md-0 username fs-2 light-font text-muted">
-        {username}
-      </p>
+      <div className="name flex-center">
+        <p className="m-2 m-md-0 username fs-2 light-font text-muted">
+          {username}
+        </p>
+
+        {isVerified && <span className="verified ms-2 mt-2" />}
+      </div>
 
       {!isFollowedLoading ? (
         <button className="btn btn-light border px-3 mt-2">Loading</button>

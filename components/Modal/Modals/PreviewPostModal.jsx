@@ -58,9 +58,18 @@ const PreviewPostModal = () => {
                 onClick={() => openProfile(currentData?.user?.username)}
                 className="details cu-pointer w-fit d-flex align-items-center ms-auto gap-3"
               >
-                <p className={`${style.username}`}>
-                  • {currentData?.user?.username}
-                </p>
+                <div className="user-data flex-center">
+                  {currentData.user.isVerified && (
+                    <span
+                      style={{ transform: "scale(.8)" }}
+                      className="verified me-1 mt-1"
+                    />
+                  )}
+
+                  <p className={`${style.username}`}>
+                    • {currentData?.user?.username}
+                  </p>
+                </div>
                 <Avatar src={currentData?.user?.avatar} />
               </div>
             </div>

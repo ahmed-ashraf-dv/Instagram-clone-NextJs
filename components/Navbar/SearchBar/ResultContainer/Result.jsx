@@ -6,6 +6,7 @@ import Avatar from "../../../Avatar";
 import style from "../../../../styles/navbar.module.scss";
 
 const Result = ({ data }) => {
+  console.log(data);
   return (
     <Link href={`/profile/${data.username}`}>
       <article
@@ -13,7 +14,17 @@ const Result = ({ data }) => {
         className={`cu-pointer p-3 d-flex gap-2 ${style.result}`}
       >
         <Avatar width={35} src={data.avatar} />
-        <p>{data.username}</p>
+
+        <div className="user-data flex-center">
+          <p>{data.username}</p>
+
+          {data.isVerified && (
+            <span
+              style={{ transform: "scale(.8)" }}
+              className="verified ms-1"
+            />
+          )}
+        </div>
       </article>
     </Link>
   );

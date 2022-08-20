@@ -45,7 +45,7 @@ const CommentsContainer = () => {
   return (
     <div className={`${style.commentsContainer}`}>
       <div className="puplisher-comment d-flex justify-content-end gap-1 p-3">
-        <div className={`${style.bio}`}>
+        <div className={`${style.bio} d-flex align-items-center`}>
           <p className="text-end">{currentData?.caption}</p>
         </div>
 
@@ -53,7 +53,18 @@ const CommentsContainer = () => {
           className="me-2 ms-2 details flex-center flex-column cu-pointer"
           onClick={openProfile}
         >
-          <p className={`${style.username}`}>• {currentData?.user?.username}</p>
+          <div className="user-data flex-center">
+            {currentData.user.isVerified && (
+              <span
+                style={{ transform: "scale(.8)" }}
+                className="verified me-1"
+              />
+            )}
+
+            <p className={`${style.username}`}>
+              • {currentData?.user?.username}
+            </p>
+          </div>
         </div>
 
         <div className="avatar cu-pointer" onClick={openProfile}>

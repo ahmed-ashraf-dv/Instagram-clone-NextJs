@@ -31,7 +31,16 @@ const UserCard = ({ data }) => {
       >
         <Avatar width={40} src={data.avatar} />
         <div className="data">
-          <p className="username small fw-bold">{data.username}</p>
+          <div className="user-data flex-center">
+            <p className="username small fw-bold">{data.username}</p>
+            {data.isVerified && (
+              <span
+                style={{ transform: "scale(.8)" }}
+                className="verified ms-1 mt-1"
+              />
+            )}
+          </div>
+
           <p className="bio small fw-200">{sliceBio(data.bio || "No Bio")}</p>
         </div>
       </article>

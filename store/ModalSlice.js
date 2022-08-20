@@ -5,6 +5,7 @@ const initialState = {
   currentData: null,
   type: null,
   cuurentUsername: null,
+  noDel: false
 };
 
 const ModalSlice = createSlice({
@@ -13,6 +14,7 @@ const ModalSlice = createSlice({
   reducers: {
     openModal: (state, { payload }) => {
       state.isOpen = true;
+      state.noDel = payload?.noDel;
       state.currentData = payload?.currentData;
       state.cuurentUsername = payload?.cuurentUsername;
       state.type = payload?.type;

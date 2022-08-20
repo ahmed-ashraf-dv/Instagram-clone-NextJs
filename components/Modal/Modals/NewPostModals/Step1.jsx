@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import style from "../../../../styles/modal.module.scss";
 
-const Step1 = ({ imgBase64, setImage, step }) => {
+const Step1 = ({ imgBase64, setImage, step, register }) => {
   const [isDrop, setIsDrop] = useState(false);
 
   const setImageFile = (img) => {
@@ -71,6 +71,7 @@ const Step1 = ({ imgBase64, setImage, step }) => {
             Select from computer
           </label>
           <input
+            {...register}
             onChange={(e) => setImageFile(e.target.files[0])}
             accept="image/*"
             type="file"

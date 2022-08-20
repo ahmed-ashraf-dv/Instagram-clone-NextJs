@@ -11,6 +11,7 @@ import axios from "axios";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import request from "../../utils/request";
 
 const schema = yup.object({
   name: yup
@@ -27,7 +28,7 @@ const schema = yup.object({
     .string()
     .required("bio feld is required")
     .min(3, "bio must be greater than 5 characters")
-    .max(20, "The bio must be less than 200 characters"),
+    .max(50, "The bio must be less than 50 characters"),
 });
 
 const EditForm = ({ userData }) => {
@@ -98,6 +99,7 @@ const EditForm = ({ userData }) => {
 
     // Empty Data
     const requestData = {};
+    const token = cookie.get("token");
 
     // Add data to object
     changeingKeys.forEach((key) => {
@@ -106,28 +108,26 @@ const EditForm = ({ userData }) => {
 
     // For Handel Image
     if (changeingKeys.includes("avatar")) {
-      requestData.avatar = imgBase64;
+      requestData.avatar = requestData.avatar[0];
     }
 
-    const token = cookie.get("token");
-
     try {
-      setRequestLoaded(false);
+      // create form data
+      const formData = new FormData();
+      Object.keys(requestData).forEach((key) =>
+        formData.append(key, requestData[key])
+      );
+      formData.append("token", token);
 
-      const { data } = await axios(`/api/editProfile`, {
-        method: "POST",
-        data: {
-          data: requestData,
-          token,
-        },
-      });
+      setRequestLoaded(false);
+      const { data } = await request.post(`/update`, formData);
 
       if (data.code === 200) {
         return router.push(`/`);
       }
 
       setRequestLoaded(true);
-      setError(data.message);
+      setError(data.message || data.msg);
     } catch (err) {
       setRequestLoaded(true);
       setError(err.message);
@@ -140,7 +140,11 @@ const EditForm = ({ userData }) => {
         <InputGroup alignStart>
           <div className="flex-start align-items-center gap-3">
             <label htmlFor="avatar" className={`cu-pointer ${style.avatar}`}>
-              <Avatar width={50} src={imgBase64 || userData.avatar} />
+              <Avatar
+                noServer={imgBase64}
+                width={50}
+                src={imgBase64 || userData.avatar}
+              />
             </label>
 
             <div className="data">

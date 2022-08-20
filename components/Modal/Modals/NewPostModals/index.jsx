@@ -6,8 +6,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 
 import useCookie from "../../../../hooks/useCookie";
-
-import axios from "axios";
+import request from "../../../../utils/request";
 
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../../../store/ModalSlice";
@@ -42,23 +41,40 @@ const NewPostModal = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    data.img = imgBase64;
     data.token = cookie.get("token");
+    data.img = img;
 
-    setIsReuest(true);
-
-    const { data: response } = await axios("/api/newpost", {
-      method: "POST",
-      data,
-    });
-
-    if (response.code === 200) {
-      dispatch(closeModal());
-      return router.push("/");
+    if (!data.token) {
+      setIsReuest(false);
+      return alert("login to continue");
     }
 
-    setIsReuest(false);
-    return alert(response?.message);
+    if (!data.img) {
+      setIsReuest(false);
+      return alert("upload img post");
+    }
+
+    try {
+      // create form data
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+
+      setIsReuest(true);
+
+      const { data: response } = await request.post("/add", formData);
+
+      if (response.code === 200) {
+        setIsReuest(false);
+        dispatch(closeModal());
+        return router.push("/");
+      }
+
+      setIsReuest(false);
+      return alert(response?.message || response?.msg);
+    } catch (err) {
+      setIsReuest(false);
+      return alert(err?.message);
+    }
   };
 
   return (
@@ -66,7 +82,6 @@ const NewPostModal = () => {
       {/* Modal Header */}
       <div className={style.header + " flex-around"}>
         <span>
-          {" "}
           <button
             hidden={step === 1}
             disabled={isReuest}
@@ -120,7 +135,12 @@ const NewPostModal = () => {
 
       {/* Modal Conatin */}
       <div className={`${style.contain} flex-center flex-column`}>
-        <Step1 imgBase64={imgBase64} setImage={setImage} step={step} />
+        <Step1
+          register={{ ...register("img") }}
+          imgBase64={imgBase64}
+          setImage={setImage}
+          step={step}
+        />
         <Step2 register={{ ...register("caption") }} step={step} />
       </div>
     </form>

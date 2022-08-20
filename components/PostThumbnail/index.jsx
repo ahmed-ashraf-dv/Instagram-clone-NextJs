@@ -30,8 +30,11 @@ const PostThumbnail = ({ data, cuurentUsername, cuurentUser }) => {
 
   return (
     <div className={`col-4 p-1 px-md-2 text-center ${style.postCard}`}>
-      <div onClick={openModalPost} className={`${style.imgBox} img cu-pointer`}>
-        <Image width="300" height="300" src={server + data.img} alt="Post" />
+      <div
+        onClick={openModalPost}
+        className={`${style.imgBox} post-box cu-pointer w-100 flex-center`}
+      >
+        <Image width={300} height={300} src={server + data.img} alt="Post" />
 
         <div className={`${style.opacityDrop} flex-center text-light`}>
           <div className={`${style.data} flex-center gap-4`}>

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["mdbcdn.b-cdn.net", "localhost"],
+    domains: ["instagram-clones-api.herokuapp.com"],
   },
   reactStrictMode: true,
   env: {

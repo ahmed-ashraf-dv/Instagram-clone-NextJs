@@ -12,6 +12,7 @@ const EditPostBtn = ({
   const dispatch = useDispatch();
 
   const openEditModal = () => {
+console.log(postId)
     // if this puplisher
     dispatch(
       openModal({

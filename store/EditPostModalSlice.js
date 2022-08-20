@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { isOpen: false, isPuplisher: null, link: "" };
+const initialState = { isOpen: false, isPuplisher: null, link: "",   noDel: false };
 
 const EditPostModalSlice = createSlice({
   name: "EditPostModalSlice",
@@ -10,6 +10,7 @@ const EditPostModalSlice = createSlice({
       state.isOpen = true;
       state.isPuplisher = payload?.isPuplisher;
       state.link = payload?.link;
+      state.noDel = payload?.noDel;
     },
     closeModal: (state) => {
       state.isOpen = false;

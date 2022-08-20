@@ -12,6 +12,8 @@ const EditPostBtn = ({
 }) => {
   const dispatch = useDispatch();
 
+  console.log(noDel)
+  
   const openEditModal = () => {
     // if this puplisher
     dispatch(

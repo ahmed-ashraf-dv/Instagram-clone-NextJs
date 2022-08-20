@@ -20,8 +20,6 @@ const PostThumbnail = ({ data, cuurentUsername, cuurentUser }) => {
       cuurentUsername,
     };
     
-    console.log(server + data.img)
-
     dispatch(
       openModal({
         currentData,

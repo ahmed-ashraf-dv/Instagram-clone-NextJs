@@ -17,6 +17,8 @@ const EditPost = () => {
   const { isOpen, isPuplisher, link, noDel } = useSelector(
     ({ EditPostModalSlice }) => EditPostModalSlice
   );
+  
+  console.log( isOpen, isPuplisher, link, noDel)
 
   const dispatch = useDispatch();
   const cookie = useCookie();

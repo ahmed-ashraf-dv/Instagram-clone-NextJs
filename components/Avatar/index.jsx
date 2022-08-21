@@ -18,6 +18,8 @@ const Avatar = ({
       width={size}
       height={size}
       alt="Avatar"
+      draggable={false} 
+      style={{ userSelect: "none" }}
     />
   );
 };

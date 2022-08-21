@@ -28,7 +28,7 @@ const schema = yup.object({
     .string()
     .required("bio feld is required")
     .min(3, "bio must be greater than 5 characters")
-    .max(500, "The bio must be less than 200 characters"),
+    .max(200, "The bio must be less than 200 characters"),
 });
 
 const EditForm = ({ userData }) => {

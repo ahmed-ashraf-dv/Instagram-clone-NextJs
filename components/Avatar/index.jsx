@@ -12,13 +12,13 @@ const Avatar = ({
 }) => {
   return (
     <img
-      src={src.startsWith("/default_avatar") || noServer ? src : server + src}
+      src={src?.startsWith("/default_avatar") || noServer ? src : server + src}
       onClick={onClick}
       className={`rounded-circle ${className}`}
       width={size}
       height={size}
       alt="Avatar"
-      draggable={false} 
+      draggable={false}
       style={{ userSelect: "none" }}
     />
   );

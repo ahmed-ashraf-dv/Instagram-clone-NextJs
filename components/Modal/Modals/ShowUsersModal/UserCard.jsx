@@ -31,7 +31,7 @@ const UserCard = ({ data }) => {
       >
         <Avatar width={40} src={data.avatar} />
         <div className="data">
-          <div className="user-data flex-center">
+          <div className="user-data d-flex align-items-center">
             <p className="username small fw-bold">{data.username}</p>
             {data.isVerified && (
               <span

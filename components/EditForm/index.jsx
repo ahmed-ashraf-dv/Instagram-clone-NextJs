@@ -7,8 +7,6 @@ import { useForm } from "react-hook-form";
 import useCookie from "../../hooks/useCookie";
 import { useRouter } from "next/router";
 
-import axios from "axios";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import request from "../../utils/request";
@@ -24,14 +22,32 @@ const schema = yup.object({
     .required("username feld is required")
     .min(3, "username must be greater than 3 characters")
     .max(20, "The username must be less than 20 characters"),
-  bio: yup
-    .string()
-    .required("bio feld is required")
-    .min(0, "bio must be greater than 0 characters")
-    .max(200, "The bio must be less than 200 characters"),
 });
 
+const userSchema = schema.concat(
+  yup.object({
+    bio: yup
+      .string()
+      .required("bio feld is required")
+      .min(0, "bio must be greater than 0 characters")
+      .max(200, "The bio must be less than 200 characters"),
+  })
+);
+
+const adminSchema = schema.concat(
+  yup.object({
+    bio: yup
+      .string()
+      .required("bio feld is required")
+      .min(0, "bio must be greater than 0 characters")
+      .max(1000, "The bio must be less than 1000 characters"),
+  })
+);
+
 const EditForm = ({ userData }) => {
+  console.log(userData?.isVerified ? adminSchema : userSchema);
+  console.log("first");
+
   const [initData, setInitData] = useState(null);
   const [isChangeing, setIschangeing] = useState(true);
 
@@ -55,7 +71,7 @@ const EditForm = ({ userData }) => {
       avatar: 0,
       bio: userData.bio || "No Bio",
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(userData?.isVerified ? adminSchema : userSchema),
   });
 
   const data = watch();

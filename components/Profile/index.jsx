@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import Layout from "../../layout";
+import Swal from "sweetalert2";
 
 import Avatar from "../Avatar";
 import SaveWordSize from "../SaveWordSize";
@@ -69,11 +70,12 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
         type: "unfollow",
         onSuccess: () => {
           setStaticts((prev) => ({ ...prev, followers: prev.followers - 1 }));
+
           setIsFollowed((prev) => !prev);
           setFollowLoading(false);
         },
         onError: (msg) => {
-          alert(msg);
+          Swal.fire("Ops!", msg, "error");
           setFollowLoading(false);
         },
       });
@@ -89,7 +91,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
         setFollowLoading(false);
       },
       onError: (msg) => {
-        alert(msg);
+        Swal.fire("Ops!", msg, "error");
         setFollowLoading(false);
       },
     });
@@ -121,16 +123,24 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
             following={staticts.following || 0}
             username={cuurentProfile.username}
           />
-              
+
           {cuurentProfile.isVerified ? (
-            <p  className="bio text-pre-line" dangerouslySetInnerHTML={{ __html: cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption" }} />
-           ) : (
+            <p
+              className="bio text-pre-line"
+              dangerouslySetInnerHTML={{
+                __html:
+                  cuurentProfile.bio.replace(/\n\s*\n/g, "\n") || "No caption",
+              }}
+            />
+          ) : (
             <SaveWordSize
-              caption={cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption"}
+              caption={
+                cuurentProfile.bio.replace(/\n\s*\n/g, "\n") || "No caption"
+              }
               className="bio text-pre-line"
               size={BIO_SIZE}
             />
-           )}
+          )}
         </div>
       </div>
 

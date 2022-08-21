@@ -2,6 +2,7 @@ import React from "react";
 import LoginForm from "../../components/LoginForm";
 
 import Head from "next/head";
+import request from "../../utils/request";
 
 const LoginPage = () => {
   return (
@@ -27,10 +28,10 @@ export const getServerSideProps = async ({ req }) => {
   }
 
   const { data } = await request({
-    url: `/users?token=${token}`,
+    url: `/user-data?token=${token}`,
   });
 
-  if (!data.length) {
+  if (data.code !== 200) {
     return {
       props: {},
     };

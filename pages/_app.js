@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/global/globals.scss";
 import "../styles/global/helper.scss";
+import "sweetalert2/src/sweetalert2.scss";
 
 import store from "../store";
 import { Provider } from "react-redux";

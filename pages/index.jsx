@@ -95,7 +95,7 @@ const Home = ({ userData, isLogin }) => {
                 />
 
                 <div className="details ms-3">
-                  <div className="user-data flex-center">
+                  <div className="user-data user-data d-flex align-items-center">
                     <p
                       onClick={toProfile}
                       className="m-0 p-0 select-none username cu-pointer text-muted"

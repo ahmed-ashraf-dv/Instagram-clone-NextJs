@@ -123,7 +123,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
           />
               
           {cuurentProfile.isVerified ? (
-            <p  classname="bio text-pre-line" dangerouslySetInnerHTML={{ __html: cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption" }} />
+            <p  className="bio text-pre-line" dangerouslySetInnerHTML={{ __html: cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption" }} />
            ) : (
             <SaveWordSize
               caption={cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption"}

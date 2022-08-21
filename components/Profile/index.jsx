@@ -123,7 +123,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
           />
           <SaveWordSize
             caption={cuurentProfile.bio || "No caption"}
-            className="bio"
+            className="bio text-pre-line"
             size={BIO_SIZE}
           />
         </div>

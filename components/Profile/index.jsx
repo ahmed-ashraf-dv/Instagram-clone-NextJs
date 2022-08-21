@@ -121,11 +121,16 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
             following={staticts.following || 0}
             username={cuurentProfile.username}
           />
-          <SaveWordSize
-            caption={cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption"}
-            className="bio text-pre-line"
-            size={BIO_SIZE}
-          />
+              
+          {cuurentProfile.isVerified ? (
+            <p  classname="bio text-pre-line" dangerouslySetInnerHTML={{ __html: cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption" }} />
+           ) : (
+            <SaveWordSize
+              caption={cuurentProfile.bio.replace(/\n\s*\n/g, '\n') || "No caption"}
+              className="bio text-pre-line"
+              size={BIO_SIZE}
+            />
+           )}
         </div>
       </div>
 

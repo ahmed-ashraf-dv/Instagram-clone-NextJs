@@ -122,7 +122,7 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
             username={cuurentProfile.username}
           />
           <SaveWordSize
-            caption={cuurentProfile.bio || "No caption"}
+            caption={cuurentProfile.bio.replace(/\n\s*\n/g, '\n')) || "No caption"}
             className="bio text-pre-line"
             size={BIO_SIZE}
           />

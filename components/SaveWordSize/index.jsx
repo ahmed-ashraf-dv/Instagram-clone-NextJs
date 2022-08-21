@@ -4,20 +4,20 @@ const SaveWordSize = ({ className, caption, size }) => {
   const [hideCaption, setHideCaption] = useState(true);
 
   const sizeHandelar = (caption) => {
-    if (caption.replace(/\n\s*\n/g, '\n')).length < size) return caption.replace(/\n\s*\n/g, '\n'));
+    if (caption.length < size) return caption;
 
-    return caption.replace(/\n\s*\n/g, '\n')).slice(0, size) + "...";
+    return caption.slice(0, size) + "...";
   };
 
   return (
     <p className={className || ""}>
-      {hideCaption ? sizeHandelar(caption.replace(/\n\s*\n/g, '\n'))) : caption.replace(/\n\s*\n/g, '\n'))}
+      {hideCaption ? sizeHandelar(caption) : caption}
       <button
-        hidden={!(caption.replace(/\n\s*\n/g, '\n')).length >= size)}
+        hidden={!(caption.length >= size)}
         onClick={() => setHideCaption((prev) => !prev)}
         className="btn btn-link text-decoration-none m-0 ms-1 p-0"
       >
-        Read {hideCaption.replace(/\n\s*\n/g, '\n')) ? "more" : "less"}
+        Read {hideCaption ? "more" : "less"}
       </button>
     </p>
   );

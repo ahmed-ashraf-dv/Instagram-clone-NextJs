@@ -37,7 +37,7 @@ const Navbar = ({ avatar, username }) => {
     <>
       <div className="offsetTop" style={{ marginTop: navHeight }} />
       <nav className={`${style.mainNavbar} px-4`}>
-        <div className="container-fluid flex-between justify-content-center justify-md-between align-items-center">
+        <div className="container-fluid flex-between justify-content-center justify-content-md-between align-items-center">
           <Link href="/">
             <div className="brand cu-pointer pe-1 p-md-0 d-none d-md-block">
               <img src="/instagram.webp" width={100} alt="instagram" />

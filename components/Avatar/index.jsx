@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import dataURLtoBlob from "../../utils/dataURLtoBlob";
 
+const server = process.env.NEXT_PUBLIC_API_LINK;
+
 const Avatar = ({
   src,
   width: size = 30,
@@ -11,15 +13,17 @@ const Avatar = ({
 }) => {
   const [img, setImg] = useState(null);
 
-  useEffect(() => setImg(dataURLtoBlob(src)), [src]);
+  useEffect(() => setImg(src), [src]);
 
   return (
     <img
       src={
         src?.startsWith("/default_avatar") || noServer
           ? src
+          : src?.startsWith("/imgs/defaultAvatars")
+          ? server + src
           : img
-          ? URL.createObjectURL(img)
+          ? URL.createObjectURL(dataURLtoBlob(img))
           : "/default_avatar.webp"
       }
       onClick={onClick}

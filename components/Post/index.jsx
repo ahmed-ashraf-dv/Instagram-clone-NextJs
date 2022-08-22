@@ -16,6 +16,7 @@ const CAPTION_SIZE = 100;
 
 const Post = ({ data, clientUsername, isVerified }) => {
   const [isLove, setisLove] = useState(false);
+  console.log(data)
 
   const dispatch = useDispatch();
 

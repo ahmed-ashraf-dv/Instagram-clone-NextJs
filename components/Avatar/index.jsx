@@ -14,6 +14,8 @@ const Avatar = ({
   const [img, setImg] = useState(null);
 
   useEffect(() => setImg(src), [src]);
+  
+  console.log(src)
 
   return (
     <img

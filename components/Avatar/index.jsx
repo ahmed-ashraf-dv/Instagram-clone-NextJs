@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import dataURLtoBlob from "../../utils/dataURLtoBlob";
 
 const server = process.env.NEXT_PUBLIC_API_LINK;
+const default_avatar = "/default_avatar.webp";
 
 const Avatar = ({
   src,
@@ -11,10 +12,10 @@ const Avatar = ({
   className = "",
   noServer,
 }) => {
-  const [img, setImg] = useState(null);
+  const [img, setImg] = useState(default_avatar);
 
   useEffect(() => setImg(src), [src]);
-  
+
   return (
     <img
       src={
@@ -22,9 +23,9 @@ const Avatar = ({
           ? src
           : src?.startsWith("/imgs/defaultAvatars")
           ? server + src
-          : img
+          : img !== default_avatar
           ? URL.createObjectURL(dataURLtoBlob(img))
-          : "/default_avatar.webp"
+          : default_avatar
       }
       onClick={onClick}
       className={`rounded-circle ${className}`}

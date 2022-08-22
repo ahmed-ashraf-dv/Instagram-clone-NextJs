@@ -42,6 +42,10 @@ const Home = ({ userData, isLogin }) => {
 
     return posts;
   }, []);
+  
+        console.log(userData)
+  
+  
 
   useEffect(() => {
     getMorePosts(1).then((posts) => {

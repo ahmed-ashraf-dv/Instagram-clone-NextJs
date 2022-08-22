@@ -11,9 +11,6 @@ const PostHeader = ({
   clientUsername,
   isVerified,
 }) => {
-  
-  console.log(isVerified);
-  
   return (
     <header className="flex-between m-2">
       <Link href={`/profile/${username}`}>

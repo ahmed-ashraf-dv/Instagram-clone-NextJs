@@ -71,7 +71,7 @@ const Home = ({ userData, isLogin }) => {
             avatar={userData?.avatar}
             className={`${style.homePage} container-fluid pt-4 ps-md-4 `}
           >
-            <div className={`${style.postContainer}`}>
+            <div className={`${style.postContainer} mx-auto mx-md-0`}>
               {isLoading ? (
                 <InfintyScroll
                   initData={initPosts}

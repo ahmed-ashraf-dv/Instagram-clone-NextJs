@@ -33,7 +33,7 @@ const Step1 = ({ imgBase64, setImage, step, register }) => {
       onDrop={onDrop}
       onMouseLeave={() => setIsDrop(false)}
       onMouseUp={() => setIsDrop(false)}
-      className={`${style.step} ${
+      className={`${style.step} w-100 ${
         step === 1 ? style.active : step > 1 ? style.compleate : ""
       } text-center step1`}
     >

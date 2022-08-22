@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 
 import request from "../utils/request";
 import axios from "axios";
+import dataURLtoBlob from "../utils/dataURLtoBlob";
 
 import Head from "next/head";
 
@@ -26,7 +27,14 @@ const Home = ({ userData, isLogin }) => {
   const getMorePosts = useCallback(async (pageNum) => {
     const posts = axios(`/api/getPosts?num=${pageNum}&amount=5`).then(
       ({ data }) => {
-        const { posts } = data;
+        let { posts } = data;
+
+        if (posts?.length) {
+          posts = posts.map((post) => ({
+            ...post,
+            img: URL.createObjectURL(dataURLtoBlob(post.img)),
+          }));
+        }
 
         return posts;
       }

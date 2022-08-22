@@ -39,7 +39,7 @@ const Navbar = ({ avatar, username }) => {
       <nav className={`${style.mainNavbar} px-4`}>
         <div className="container-fluid flex-between align-items-center">
           <Link href="/">
-            <div className="brand cu-pointer pe-1 p-md-0">
+            <div className="brand cu-pointer pe-1 p-md-0 d-none d-md-block">
               <img src="/instagram.webp" width={100} alt="instagram" />
             </div>
           </Link>

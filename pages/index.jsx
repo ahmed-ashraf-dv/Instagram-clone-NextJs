@@ -43,10 +43,6 @@ const Home = ({ userData, isLogin }) => {
     return posts;
   }, []);
   
-        console.log(userData)
-  
-  
-
   useEffect(() => {
     getMorePosts(1).then((posts) => {
       const orderByDate = (array) =>
@@ -84,7 +80,6 @@ const Home = ({ userData, isLogin }) => {
                   Component={Post}
                   pageProps={{
                     clientUsername: userData.username,
-                    isVerified: userData.isVerified,
                   }}
                   IsEndComponent={
                     <p className="text-muted d-block w-fit mx-auto">

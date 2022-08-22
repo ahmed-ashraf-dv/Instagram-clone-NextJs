@@ -54,27 +54,30 @@ const NewPostModal = () => {
       return alert("upload img post");
     }
 
-    try {
-      // create form data
-      const formData = new FormData();
-      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+    const reader = new FileReader();
+    reader.onload = async () => {
+      data.img = reader.result;
 
-      setIsReuest(true);
+      try {
+        setIsReuest(true);
 
-      const { data: response } = await request.post("/add", formData);
+        const { data: response } = await request.post("/add", data);
 
-      if (response.code === 200) {
+        if (response.code === 200) {
+          setIsReuest(false);
+          dispatch(closeModal());
+          return router.push("/");
+        }
+
         setIsReuest(false);
-        dispatch(closeModal());
-        return router.push("/");
+        return alert(response?.message || response?.msg);
+      } catch (err) {
+        setIsReuest(false);
+        return alert(err?.message);
       }
+    };
 
-      setIsReuest(false);
-      return alert(response?.message || response?.msg);
-    } catch (err) {
-      setIsReuest(false);
-      return alert(err?.message);
-    }
+    reader.readAsDataURL(data.img);
   };
 
   return (

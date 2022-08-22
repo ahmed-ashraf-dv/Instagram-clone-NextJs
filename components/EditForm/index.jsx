@@ -45,9 +45,6 @@ const adminSchema = schema.concat(
 );
 
 const EditForm = ({ userData }) => {
-  console.log(userData?.isVerified ? adminSchema : userSchema);
-  console.log("first");
-
   const [initData, setInitData] = useState(null);
   const [isChangeing, setIschangeing] = useState(true);
 
@@ -119,24 +116,46 @@ const EditForm = ({ userData }) => {
 
     // Add data to object
     changeingKeys.forEach((key) => {
+      if (changeingKeys[key] === "") {
+        setRequestLoaded(true);
+        setError(`${key} cant be empty`);
+      }
+
       requestData[key] = cuurentData[key];
     });
 
-    // For Handel Image
-    if (changeingKeys.includes("avatar")) {
-      requestData.avatar = requestData.avatar[0];
+    if (requestData.username) {
+      requestData.username = requestData.username.replaceAll(" ", "");
     }
 
+    const setAvatar = async () => {
+      return new Promise((res) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          requestData.avatar = reader.result;
+          setImgBase64(reader.result);
+
+          res("success");
+        };
+        reader.readAsDataURL(data.avatar[0]);
+      });
+    };
+
+    for (let key of Object.keys(requestData)) {
+      if (requestData[key] === "") {
+        setRequestLoaded(true);
+        return setError(`${key} cant be empty`);
+      }
+    }
+
+    // For Handel Image
+    if (changeingKeys.includes("avatar")) await setAvatar();
+
     try {
-      // create form data
-      const formData = new FormData();
-      Object.keys(requestData).forEach((key) =>
-        formData.append(key, requestData[key])
-      );
-      formData.append("token", token);
+      requestData.token = token;
 
       setRequestLoaded(false);
-      const { data } = await request.post(`/update`, formData);
+      const { data } = await request.post(`/update`, requestData);
 
       if (data.code === 200) {
         return router.push(`/`);

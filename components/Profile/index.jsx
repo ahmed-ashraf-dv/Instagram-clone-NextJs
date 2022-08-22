@@ -16,6 +16,7 @@ import style from "../../styles/explore.module.scss";
 
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import dataURLtoBlob from "../../utils/dataURLtoBlob";
 
 const BIO_SIZE = 200; // Chracters
 
@@ -39,6 +40,13 @@ const Profile = ({ cuurentProfile, userData, cuurentProfileStaticts }) => {
         `/api/getPostsById/${cuurentProfile._id}?num=${pageNum}&amount=12`
       ).then(({ data }) => {
         const { posts } = data;
+
+        if (posts?.length) {
+          posts = posts.map((post) => ({
+            ...post,
+            img: URL.createObjectURL(dataURLtoBlob(post.img)),
+          }));
+        }
 
         return posts;
       });

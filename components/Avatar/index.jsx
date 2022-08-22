@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
-
-const server = process.env.NEXT_PUBLIC_API_LINK;
+import React, { useEffect, useState } from "react";
+import dataURLtoBlob from "../../utils/dataURLtoBlob";
 
 const Avatar = ({
   src,
@@ -10,9 +9,19 @@ const Avatar = ({
   className = "",
   noServer,
 }) => {
+  const [img, setImg] = useState(null);
+
+  useEffect(() => setImg(dataURLtoBlob(src)), [src]);
+
   return (
     <img
-      src={src?.startsWith("/default_avatar") || noServer ? src : server + src}
+      src={
+        src?.startsWith("/default_avatar") || noServer
+          ? src
+          : img
+          ? URL.createObjectURL(img)
+          : "/default_avatar.webp"
+      }
       onClick={onClick}
       className={`rounded-circle ${className}`}
       width={size}

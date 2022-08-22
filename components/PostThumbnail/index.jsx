@@ -5,7 +5,6 @@ import Image from "next/image";
 
 import { useDispatch } from "react-redux";
 import { openModal } from "../../store/ModalSlice";
-const server = process.env.NEXT_PUBLIC_API_LINK;
 
 const PostThumbnail = ({ data, cuurentUsername, cuurentUser }) => {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const PostThumbnail = ({ data, cuurentUsername, cuurentUser }) => {
       postId: data.postId,
       cuurentUsername,
     };
-    
+
     dispatch(
       openModal({
         currentData,
@@ -34,7 +33,7 @@ const PostThumbnail = ({ data, cuurentUsername, cuurentUser }) => {
         onClick={openModalPost}
         className={`${style.imgBox} post-box cu-pointer w-100 flex-center`}
       >
-        <Image width={300} height={300} src={server + data.img} alt="Post" />
+        <Image width={300} height={300} src={data.img} alt="Post" />
 
         <div className={`${style.opacityDrop} flex-center text-light`}>
           <div className={`${style.data} flex-center gap-4`}>

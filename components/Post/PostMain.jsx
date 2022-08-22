@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import style from "../../styles/post.module.scss";
 
-const server = process.env.NEXT_PUBLIC_API_LINK;
-
 const PostMain = ({ img, setisLove }) => {
   const [love, setLove] = useState(false);
 
@@ -28,7 +26,7 @@ const PostMain = ({ img, setisLove }) => {
           alt=""
         />
       </div>
-      <img src={server + img} alt="" className={`${style.imsPost}`} />
+      <img src={img} alt="" className={`${style.imsPost}`} />
     </main>
   );
 };
